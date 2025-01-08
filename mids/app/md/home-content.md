@@ -6,11 +6,9 @@ for data standards and mapping structures.
 
 Getting started[](#getting-started)
 -----------------------------------
-*   [Normative Information Element List]()
-*   [SSSOM Mapping]()
+*   [Normative Information Element List](/information-elements)
+*   [Mappings](/mappings)
 *   Provide feedback through a [github issue](https://github.com/tdwg/mids/issues)
 
 -------------
-## Public Review 
-First setup of MIDS documentation pages
-*Last Updated: December 31st, 2024*
+*Last Updated: January 8th, 2025*

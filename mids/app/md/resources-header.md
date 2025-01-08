@@ -1,2 +1,0 @@
-# MIDS Resources
-

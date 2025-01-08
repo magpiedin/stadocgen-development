@@ -27,15 +27,23 @@ Built using Python Flask, the application transforms a set of CSV files into dat
 │   ├───templates        | Jinja templates
 │   │   └───includes     | Page components partitioned into folders based on scope
 │   ├───utils            | Data transformation utilities 
+│   │   └───analysis     | Various scripts for analysis of source and output data files
 │   │   └───schemas      | Tabular data schemas generated from the source CSV files
 │   │   └───transformers | Scripts that transform source data files into output used to generate the documentation webpages
-│   │   └───analysis     | Various scripts for analysis of source and output data files
 
 _init__.py
 freeze.py   Frozen flask script to generate build files
 routes.py   Dynamic flask script
 ```
- 
+
+### Organization of StaDocGen
+StaDocGen is structured as a collection of top-level folders for every documentation website due to a number of technological constraints. 
+We call these ***instances*** of StaDocGen. Documentation websites are created independently, and instances do not share resources*. 
+Please take note of the scope of each of the following processes; some are unique to a single instance or group of instances, while 
+others are applicable to all standards indicated as global.
+
+* *The shared directory contains a starter set of files to create new instances of StaDocGen. The first step to adding a new standard is to create a copy of the shared folder then rename it using the namespace of the standard. 
+
 ### Commands
 Creating the Environment
 * Stadocgen was created using Windows 11, PyCharm Professional, Python 3.11 and the Package Manager PIP
@@ -47,7 +55,7 @@ I highly recommend using ConEmu https://conemu.github.io/ or Git Bash. You can a
 2. Type cmd
 3. Press enter
 
-### Install Packages 
+### Install Packages - Global
 * Open command line window
 * Navigate to the root directory of this repository
 * Run the following commands
@@ -65,14 +73,14 @@ I highly recommend using ConEmu https://conemu.github.io/ or Git Bash. You can a
 * If you haven't already, open the meta.yml metadata file and enter the appropriate information for your standard.
 
 ### Testing
-* Open the command line window and navigate to the project root directory
+* Open the command line window and navigate to the instance root directory (e.g. (root)/ltc)
 * Make sure the virtual environment is activated (conda activate stadcogen-venv or .\.stadocgen-venv\Scripts\activate)
 * At the commend line, enter $flask run
 * Open a browser to localhost:5000
 * To end testing and stop the development server, press CTRL+C in the command line window
 
 ### Build Documentation Pages
-* Open a command prompt in the app subdirectory (/app) 
+* Open a command prompt in the app subdirectory of the instance (e.g. /ltc/app) 
 * Enter *python freeze.py build*
 * Copy the entire contents of the build directory (/app/build) to the docs folder in the target repository
 * Publish changes using the appropriate GitHub workflow
@@ -90,12 +98,8 @@ Once the new build is pushed to the target repo, continue the standard protocol 
 files, which is ill-advised. Fortunately, the same problems have not been encountered when using the package manager, PIP, and a native python virtual environment. 
 
 ## App Documentation
-StaDocGen documentation is written and built with Writerside (https://www.jetbrains.com/writerside/). The documentation remains a work in progress. When ready, it will be published to the 
-docs build directory for presentation/publication.
-
-LtC Pipeline
-Source: https://github.com/ben-norton/stadocgen/tree/main/app/build
-Target: https://github.com/tdwg/ltc/tree/main/docs
+StaDocGen documentation is written and built with Writerside (https://www.jetbrains.com/writerside/). The documentation remains a work in 
+progress. When ready, it will be published to the docs build directory for presentation/publication.
 
 #### Contact
 Ben Norton

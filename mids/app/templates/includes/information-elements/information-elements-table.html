@@ -1,5 +1,5 @@
-<h2 id="5-vocabulary">5 Vocabulary</h2>
-{% for idx, v in informationElements.iterrows() %}
+<h2 id="52-information-elements-schema">5.2 Information Elements Schema</h2>
+{% for k, v in informationElements.iterrows() %}
     <span id="{{ v['term_local_name']|replace('.','_') }}"></span>
     <div class="term-table-wrapper">
         <div class="table-responsive print-avoid">
@@ -23,7 +23,11 @@
 
                      <tr>
                         <th scope="row">Level</th>
-                        <td>{{ v['class_label'] }}</td>
+                        <td>
+                            <a href="#{{ v['class_name'] }}">
+                                {{ v['class_label'] }}
+                            </a>
+                         </td>
                     </tr>
 
                     <tr>
@@ -88,9 +92,7 @@
                     </tr>
                 </tbody>
             </table>
-
-                {% include 'includes/information-elements/mappings-table.html' %}
-
+            {% include 'includes/information-elements/mappings-table.html' %}
         </div>
     </div>
 {% endfor %}

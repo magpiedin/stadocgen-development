@@ -59,6 +59,9 @@ df_dwc_mapping.to_csv(dwc_uniquecsv, index=False, encoding='utf8')
 df_dwc['object_source_version'] = 'http://rs.tdwg.org/dwc/terms'
 # Replace colon in column names with underscores - jinja2 template reserved character
 df_dwc.columns = df_dwc.columns.str.replace(':','_', regex=True)
+# Create persistent URLs
+df_dwc['object_url'] = df_dwc['object_id'].str.replace('dwc:','http://rs.tdwg.org/dwc/terms/')
+
 df_dwc.to_csv(dwc_sssomfile, index=False, encoding='utf8')
 
 # ------------------------------------------------------------

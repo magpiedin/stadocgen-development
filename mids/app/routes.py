@@ -53,34 +53,33 @@ def information_elements():
     mappings_csv = 'app/data/output/mids-mappings.csv'
     mappings_df = pd.read_csv(mappings_csv, encoding='utf8')
 
+    levels_csv = 'app/data/output/mids-levels.csv'
+    levels_df = pd.read_csv(levels_csv, encoding='utf8')
 
     information_elements_mapped_df = pd.merge(information_elements_df,
         mappings_df[['term_local_name','sssom_object_category','sssom_object_id','object_source_version','sssom_subject_category']],
         on=['term_local_name'], how='left'
     )
-    print(information_elements_mapped_df)
+    # informationElements = information_elements_mapped_df.sort_values(by=['class_name', 'term_local_name'])
+    information_elements_df = information_elements_df.sort_values(by=['class_name', 'term_local_name'])
 
-    terms = information_elements_mapped_df.sort_values(by=['term_local_name'])
+#    terms = information_elements_mapped_df.sort_values(by=['term_local_name'])
 
-    levels_csv = 'app/data/output/mids-levels.csv'
-    levels_df = pd.read_csv(levels_csv, encoding='utf8')
-
-    informationElements = information_elements_mapped_df.sort_values(by=['class_name', 'term_local_name'])
     levels = levels_df.sort_values(by=['term_local_name'])
 
     grpdict2 = information_elements_df.groupby('class_name')[
         ['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'term_version_iri', 'term_modified']].apply(
         lambda g: list(map(tuple, g.values.tolist()))).to_dict()
-    informationElementsByLevel = []
+    information_elements_by_level = []
 
     for i in grpdict2:
-        informationElementsByLevel.append({
+        information_elements_by_level.append({
             'class': i,
             'informationElementList': grpdict2[i]
         })
 
     return render_template('information-elements.html',
-                           home_markdown=Markup(marked_text),
+                           headerMarkdown=Markup(marked_text),
                            pageTitle='Information Elements',
                            title=meta['title'],
                            acronym=meta['acronym'],
@@ -88,9 +87,9 @@ def information_elements():
                            githubRepo=meta['links']['github_repository'],
                            slug='information-elements',
                            levels=levels,
-                           informationElements=informationElements,
+                           informationElements=information_elements_df,
                            mappings=mappings_df,
-                           informationElementsByLevel=informationElementsByLevel
+                           informationElementsByLevel=information_elements_by_level
                            )
 
 @app.route('/mappings')
@@ -112,6 +111,6 @@ def mappings():
                            acronym=meta['acronym'],
                            landingPage=meta['links']['landing_page'],
                            githubRepo=meta['links']['github_repository'],
-                           slug='information-elements',
+                           slug='mappings',
                            mappings=mappings_df,
                            )
