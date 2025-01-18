@@ -60,7 +60,9 @@ df_dwc['object_source_version'] = 'http://rs.tdwg.org/dwc/terms'
 # Replace colon in column names with underscores - jinja2 template reserved character
 df_dwc.columns = df_dwc.columns.str.replace(':','_', regex=True)
 # Create persistent URLs
-df_dwc['object_url'] = df_dwc['object_id'].str.replace('dwc:','http://rs.tdwg.org/dwc/terms/')
+df_dwc['object_url'] = df_dwc['sssom_object_id'].str.replace('dwc:','http://rs.tdwg.org/dwc/terms/')
+df_dwc['subject_url'] = df_dwc['sssom_subject_id'].str.replace('mids:','https://tdwg.github.io/mids/information-elements#')
+
 
 df_dwc.to_csv(dwc_sssomfile, index=False, encoding='utf8')
 
@@ -80,6 +82,10 @@ df_abcd_mapping.to_csv(abcd_uniquecsv, index=False, encoding='utf8')
 df_abcd['object_source_version'] = 'http://www.tdwg.org/schemas/abcd/2.06'
 # Replace colon in column names with underscores - jinja2 template reserved character
 df_abcd.columns = df_abcd.columns.str.replace(':','_', regex=True)
+
+df_abcd['object_url'] = df_abcd['sssom_object_id'].str.replace('abcd:','http://rs.tdwg.org/abcd/terms/')
+df_abcd['subject_url'] = df_abcd['sssom_subject_id'].str.replace('mids:','https://tdwg.github.io/mids/information-elements#')
+
 df_abcd.to_csv(abcd_sssomfile, index=False, encoding='utf8')
 
 

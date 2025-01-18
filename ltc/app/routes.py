@@ -29,7 +29,7 @@ def pygments_css():
 @app.route('/')
 def home():
     home_mdfile = 'app/md/home-content.md'
-    with open(home_mdfile, encoding="utf8") as f:
+    with open(home_mdfile, encoding="utf-8") as f:
         marked_text = markdown2.markdown(f.read())
     return render_template('home.html',
                            home_markdown=Markup(marked_text),
@@ -44,15 +44,15 @@ def home():
 def terms():
     header_mdfile = 'app/md/termlist-header.md'
 
-    with open(header_mdfile, encoding="utf8") as f:
+    with open(header_mdfile, encoding="utf-8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     # Terms
     terms_csv = 'app/data/output/ltc-termlist.csv'
-    terms_df = pd.read_csv(terms_csv, encoding='utf8')
+    terms_df = pd.read_csv(terms_csv, encoding='utf-8')
 
     sssom_csv = 'app/data/output/ltc-sssom.csv'
-    sssom_df = pd.read_csv(sssom_csv, encoding='utf8')
+    sssom_df = pd.read_csv(sssom_csv, encoding='utf-8')
 
     terms_df['examples'] = terms_df['examples'].str.replace('"', '')
     terms_df['definition'] = terms_df['definition'].str.replace('"', '')
@@ -107,11 +107,11 @@ def terms():
 def quickReference():
     header_mdfile = 'app/md/quick-reference-header.md'
     marked_text = ''
-    with open(header_mdfile, encoding="utf8") as f:
+    with open(header_mdfile, encoding="utf-8") as f:
         marked_text = markdown2.markdown(f.read())
 
     # Quick Reference Main
-    df = pd.read_csv('app/data/output/ltc-termlist.csv', encoding='utf8')
+    df = pd.read_csv('app/data/output/ltc-termlist.csv', encoding='utf-8')
     df['examples'] = df['examples'].str.replace(r'"', '')
     df['definition'] = df['definition'].str.replace(r'"', '')
     df['usage'] = df['usage'].str.replace(r'"', '')
@@ -158,12 +158,12 @@ def quickReference():
 def docResources():
     header_mdfile = 'app/md/resources-header.md'
     marked_text = ''
-    with open(header_mdfile, encoding="utf8") as f:
+    with open(header_mdfile, encoding="utf-8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     sssom_mdfile = 'app/md/sssom-reference.md'
     marked_sssom = ''
-    with open(sssom_mdfile, encoding="utf8") as f:
+    with open(sssom_mdfile, encoding="utf-8") as f:
         marked_sssom = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     return render_template('resources.html',

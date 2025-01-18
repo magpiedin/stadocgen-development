@@ -5,6 +5,8 @@ import markdown2
 import pandas as pd
 import yaml
 
+relpath = 'app/'
+
 with open('app/meta.yml') as metadata:
     meta = yaml.safe_load(metadata)
 
@@ -18,19 +20,12 @@ def internal_error(error):
     return render_template('500.html',
                            pageTitle='500 Unknown Error'), 500
 
-
-'''
-@app.route('/pygments.css')
-def pygments_css():
-    return pygments_style_defs('tango'), 200, {'Content-Type': 'text/css'}
-'''
-
 # Homepage with content stored in markdown file
 @app.route('/')
 def home():
-    home_mdfile = 'app/md/home-content.md'
+    home_mdfile = str(relpath) + 'md/home-content.md'
     with open(home_mdfile, encoding="utf8") as f:
-        marked_text = markdown2.markdown(f.read())
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
     return render_template('home.html',
                            home_markdown=Markup(marked_text),
                            pageTitle='Home',
@@ -43,27 +38,20 @@ def home():
 
 @app.route('/information-elements')
 def information_elements():
-    home_mdfile = 'app/md/information-elements-header.md'
+    home_mdfile = str(relpath) + 'md/information-elements-header.md'
     with open(home_mdfile, encoding="utf8") as f:
-        marked_text = markdown2.markdown(f.read())
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-    information_elements_csv = 'app/data/output/mids-master-list.csv'
+    information_elements_csv = str(relpath) + 'data/output/mids-master-list.csv'
     information_elements_df = pd.read_csv(information_elements_csv, encoding='utf8')
 
-    mappings_csv = 'app/data/output/mids-mappings.csv'
+    mappings_csv = str(relpath) + 'data/output/mids-mappings.csv'
     mappings_df = pd.read_csv(mappings_csv, encoding='utf8')
 
-    levels_csv = 'app/data/output/mids-levels.csv'
+    levels_csv = str(relpath) + 'data/output/mids-levels.csv'
     levels_df = pd.read_csv(levels_csv, encoding='utf8')
 
-    information_elements_mapped_df = pd.merge(information_elements_df,
-        mappings_df[['term_local_name','sssom_object_category','sssom_object_id','object_source_version','sssom_subject_category']],
-        on=['term_local_name'], how='left'
-    )
-    # informationElements = information_elements_mapped_df.sort_values(by=['class_name', 'term_local_name'])
     information_elements_df = information_elements_df.sort_values(by=['class_name', 'term_local_name'])
-
-#    terms = information_elements_mapped_df.sort_values(by=['term_local_name'])
 
     levels = levels_df.sort_values(by=['term_local_name'])
 
@@ -94,14 +82,14 @@ def information_elements():
 
 @app.route('/mappings')
 def mappings():
-    home_mdfile = 'app/md/mappings-header.md'
+    home_mdfile = str(relpath) + 'md/mappings-header.md'
     with open(home_mdfile, encoding="utf8") as f:
-        marked_text = markdown2.markdown(f.read())
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-    master_list_csv = 'app/data/output/mids-master-list.csv'
+    master_list_csv = str(relpath) + 'data/output/mids-master-list.csv'
     master_list_df = pd.read_csv(master_list_csv, encoding='utf8')
 
-    mappings_csv = 'app/data/output/mids-mappings.csv'
+    mappings_csv = str(relpath) + 'data/output/mids-mappings.csv'
     mappings_df = pd.read_csv(mappings_csv, encoding='utf8')
 
     return render_template('mappings.html',

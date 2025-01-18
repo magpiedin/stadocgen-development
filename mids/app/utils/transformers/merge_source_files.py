@@ -50,8 +50,6 @@ abcdFile = str(projectPath) + '/app/data/output/mids-abcd-sssom.csv'
 dwcFile = str(projectPath) + '/app/data/output/mids-dwc-sssom.csv'
 mappingsFile = str(projectPath) + '/app/data/output/mids-mappings.csv'
 
-
-
 df_abcd = pd.read_csv(abcdFile, encoding="utf8")
 df_dwc = pd.read_csv(dwcFile, encoding="utf8")
 
