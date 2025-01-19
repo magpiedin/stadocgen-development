@@ -6,10 +6,10 @@ links:
   github_repository:  "https://github.com/tdwg/mids"
 sources:
   tabulated:
-    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/standard/mids-levels/MIDS-levels-draft.csv"
-    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/standard/information_elements/mids_information_elements_draft.csv"
-    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/sssom-mapping/dwc/biology/sssom_mids_dwc_biology_02.sssom.tsv"
-    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/sssom-mapping/abcd/biology/sssom_mids_abcd_biology_02.sssom.tsv"
+    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/terms/information_elements/mids_information_elements_draft.csv"
+    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/terms/mids-levels/MIDS-levels-draft.csv"
+    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/mappings/abcd/biology/sssom_mids_abcd_biology_02.sssom.tsv"
+    - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/mappings/dwc/biology/sssom_mids_dwc_biology_02.sssom.tsv"
   markdown:       # Full URL of Source Markdown content files as YAML List
     - "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/standard/informationElementListHeader.md"
 last_modified:   "20241227"
