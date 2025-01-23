@@ -1,8 +1,10 @@
 # Source File Specifications
 
+## MIDS Levels
 File: MIDS-levels-draft.csv
 CSV file contains MIDS levels that are considered semantically equivalent to class in the common class-property RDF structure.
 
+### Terms Table
 | source column name | qualified term                   | target column name | remarks                                                                   |
 | -- |----------------------------------|--------------------|---------------------------------------------------------------------------|
 | level | skos:hiddenLabel                 | class_name         | MIDS Levels are equivalent to class in a the class-property RDF structure |
@@ -11,17 +13,15 @@ CSV file contains MIDS levels that are considered semantically equivalent to cla
 | longDescription | dcterms:abstract                 | abstract           |
 | purpose |                                  | purpose            | Defined here as the intention or objective of a term                      |
 
-## Merged File Fields
 
-
-## Mappings to TDWG fields
+### Mappings to TDWG fields
 level > term_local_name
 level > term_local_name
 prefLabel > label
 shortDescription > definition
 longDescription > notes
 
-## Processing Notes
+### Processing Notes
 MIDS-levels-draft.csv
 1. Add column rdf_type
 2. Set all rdf_type values http://www.w3.org/2000/01/rdf-schema#Class
@@ -30,7 +30,34 @@ MIDS-levels-draft.csv
     prefLabel > label
     shortDescription > definition
     longDescription > notes
-  
+
+## Information Elements
+
+## MIDS Levels
+File: mids_information_elements_draft.csv
+
+### Terms Table
+| source column name | qualified term                   | target column name | remarks                                                                   |
+| -- |----------------------------------|--------------------|---------------------------------------------------------------------------|
+| namespace | | | |
+| informationElement_localName | | | |
+| label | | | |
+| definition | | | |
+| usage | | | |
+| recommendations | | | |
+| examples | | | |
+| rdg_type | | | |
+| tdwgutility_required | | | |
+| tdwgutility_repeatable | | | |
+| term_status | | | |
+| term_added | | | |
+| term_modified | | | |
+
+
+### Mappings to TDWG fields
+
+
+### Processing Notes
 mids_information_elements_draft.csv
 1. Set rdf_type to http://www.w3.org/1999/02/22-rdf-syntax-ns#Property
 2. Column name changes 
