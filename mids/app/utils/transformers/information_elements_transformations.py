@@ -69,6 +69,5 @@ df['term_ns_name'] = 'mids:' + df['term_local_name']
 # Drop misused columns (columns related to ratification
 df.drop(columns=['term_added','term_modified'], inplace=True)
 
-
 # Resave
 df.to_csv(targetFile, index=False, encoding='utf8')

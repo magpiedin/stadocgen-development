@@ -12,4 +12,4 @@ This directory contains all original source csv files and the transformed versio
 | mids-mappings | Merged ABCD and DWC mapping files | merge_source_files.py  |
 
 Transformation sequence
-information_elements_transformations.py > levels_transformations.py > process_source_mappings.py > merge_source_files.py
+copy-source-files.py > information_elements_transformations.py > levels_transformations.py > process_source_mappings.py > merge_source_files.py
