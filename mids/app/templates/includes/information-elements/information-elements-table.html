@@ -59,11 +59,11 @@
                         </tr>
                     {% endif %}
 
-                    {% if v['scope_note'] is number %}
+                    {% if v['isRequiredBy'] is number %}
                     {% else %}
                         <tr>
-                            <th scope="row">Scope</th>
-                            <td>{{ v['scope_note'] }}</td>
+                            <th scope="row">isRequiredBy</th>
+                            <td>{{ v['isRequiredBy'] }}</td>
                         </tr>
                     {% endif %}
 
@@ -82,14 +82,6 @@
                             </td>
                         </tr>
                     {% endif %}
-                    <tr>
-                        <th scope="row">Required For</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Repeatable</th>
-                        <td>{{ v['is_repeatable'] }}</td>
-                    </tr>
                 </tbody>
             </table>
             {% include 'includes/information-elements/mappings-table.html' %}

@@ -1,25 +1,39 @@
 # Source File Specifications
 
 ## MIDS Levels
-File: MIDS-levels-draft.csv
-CSV file contains MIDS levels that are considered semantically equivalent to class in the common class-property RDF structure.
+File: levels.tsv
+File contains the MIDS levels that are considered semantically equivalent to rdfs:Class in the class-property RDF structure.
 
-### Terms Table
-| source column name | qualified term                   | target column name | remarks                                                                   |
-| -- |----------------------------------|--------------------|---------------------------------------------------------------------------|
-| level | skos:hiddenLabel                 | class_name         | MIDS Levels are equivalent to class in a the class-property RDF structure |
-| prefLabel | skos:prefLabel                   | class_label        |
-| shortDescription | schema:disambiguatingDescription | short_description  |
-| longDescription | dcterms:abstract                 | abstract           |
-| purpose |                                  | purpose            | Defined here as the intention or objective of a term                      |
+| Source column | Qualified Term |
+| -- | -- | 
+| term_local_name | rdfs:label |
+| alt_label | skos:altLabel |
+| definition | skos:definition |
+| notes | skos:note |
+| purpose | purpose |
+
+
+## Information Elements
+File: information_elements.tsv
+
+| Source column | Qualified Term |
+| -- | -- |
+| namespace | namespace |
+| MIDSLevel_localName | Class name |
+| informationElement_localName | rdfs:label |
+| definition | skos:definition |
+| usage | vann:usageNote |
+| recommendations | recommendation |
+| rdf_type | rdf:type |
+| isRequiredBy | dcterms:isRequiredBy |
+| term_added | dcterms:created |
+| term_modified | dcterms:modified |
+
 
 
 ### Mappings to TDWG fields
-level > term_local_name
-level > term_local_name
-prefLabel > label
-shortDescription > definition
-longDescription > notes
+
+
 
 ### Processing Notes
 MIDS-levels-draft.csv

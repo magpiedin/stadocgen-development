@@ -30,9 +30,6 @@ def internal_error(error):
                            pageTitle='500 Unknown Error'), 500
 
 
-# Homepage with content stored in markdown file
-# Homepage with content stored in markdown file
-# Homepage with content stored in markdown file
 @app.route('/')
 def home():
     home_mdfile = str(relpath) + 'md/home-content.md'
