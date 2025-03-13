@@ -43,10 +43,10 @@ df = pd.read_csv(targetFile, encoding="utf8",sep='\t')
 
 # Renamez
 df.rename(columns={'MIDSLevel_localName': 'class_name',
-                    'informationElement_localName': 'term_local_name',
-                    'usage': 'purpose',
-                    'recommendations': 'usage_note',
-                   'term_added': 'term_created'
+                        'informationElement_localName': 'term_local_name',
+                        'usage': 'purpose',
+                        'recommendations': 'usage_note',
+                        'term_added': 'term_created'
                    }, inplace=True)
 
 # RDF Type

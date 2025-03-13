@@ -29,8 +29,6 @@ Sequence: process_source_mappings.py > levels_transformations.py > information_e
 - Merges the transformed MIDS levels and Information Elements CSV files into a single MIDS Termlist CSV
 - Joins the merged dataframe to the mids_class_property_map.csv (the result of process_source_mappings) to append the class_name to information_elements
 
- 
-
 ## Notes
 1. All files in the source directory are preserved in their original state upon import into stadocgen.
 2. Source files are only updated when a more recent version is imported (copied) into StaDocGen. 

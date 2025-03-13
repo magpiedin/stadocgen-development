@@ -1,4 +1,4 @@
-from mids.app import app
+from app import app
 from flask import render_template
 from markupsafe import Markup
 import markdown2
@@ -44,16 +44,16 @@ def information_elements():
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     information_elements_tsv = str(relpath) + 'data/output/master-list.tsv'
-    information_elements_df = pd.read_tsv(information_elements_tsv, encoding='utf8')
+    information_elements_df = pd.read_csv(information_elements_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     mappings_tsv = str(relpath) + 'data/output/mappings.tsv'
-    mappings_df = pd.read_tsv(mappings_tsv, encoding='utf8')
+    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     levels_tsv = str(relpath) + 'data/output/levels.tsv'
-    levels_df = pd.read_tsv(levels_tsv, encoding='utf8')
+    levels_df = pd.read_csv(levels_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     examples_tsv = str(relpath) + 'data/output/levels.tsv'
-    examples_df = pd.read_tsv(examples_tsv, encoding='utf8')
+    examples_df = pd.read_csv(examples_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     information_elements_df = information_elements_df.sort_values(by=['class_name', 'term_local_name'])
 
@@ -91,10 +91,10 @@ def mappings():
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     master_list_tsv = str(relpath) + 'data/output/mids-master-list.csv'
-    master_list_df = pd.read_tsv(master_list_tsv, encoding='utf8')
+    master_list_df = pd.read_csv(master_list_tsv, encoding='utf8')
 
     mappings_tsv = str(relpath) + 'data/output/mids-mappings.csv'
-    mappings_df = pd.read_tsv(mappings_tsv, encoding='utf8')
+    mappings_df = pd.read_csv(mappings_tsv, encoding='utf8')
 
     return render_template('mappings.html',
                            home_markdown=Markup(marked_text),
