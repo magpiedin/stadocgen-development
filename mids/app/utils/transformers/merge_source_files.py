@@ -20,11 +20,10 @@ termsFile = str(projectPath) + '/app/data/output/master-list.tsv'
 
 # Create empty template if file doesn't exist
 if not os.path.isdir(termsFile):
-    fields = ['namespace','term_local_name','label','definition','usage','notes','examples','rdf_type','term_created','term_modified','compound_name','namespace_iri','term_iri','term_ns_name','term_version_iri','datatype','purpose','alt_label']
+    fields = ['namespace','term_local_name','label','definition','usage','notes','examples','rdf_type','term_created','term_modified','compound_name','namespace_iri','term_iri','term_ns_name','term_version_iri','datatype','purpose','alt_label','level']
     with open(termsFile, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames = fields, delimiter='\t')
         writer.writeheader()
-
 
 df_levels = pd.read_csv(levelsFile, encoding='utf8',sep='\t')
 df_infoElements = pd.read_csv(infoElFile, encoding='utf8',sep='\t')
@@ -61,6 +60,7 @@ df_mappings = pd.concat([df_abcd,df_dwc])
 
 # Add term column with namespace prefix
 df_mappings['term_local_name'] = df_mappings['sssom_subject_id'].str.replace('mids:', '')
+df_mappings.index.name = 'mapping_id'
 
 # Write Final Mappings files
-df_mappings.to_csv(mappingsFile, index=False, encoding='utf8',sep='\t')
+df_mappings.to_csv(mappingsFile, index=True, encoding='utf8',sep='\t')

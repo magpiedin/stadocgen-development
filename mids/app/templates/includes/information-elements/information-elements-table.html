@@ -13,7 +13,7 @@
                 <tbody>
                     <tr>
                         <th scope="row">Element URI</th>
-                        <td>{{ v['term_uri']|urlize }}</td>
+                        <td>{{ v['term_uri']|urlize }} (Pending)</td>
                     </tr>
 
                     <tr>
@@ -25,7 +25,7 @@
                         <th scope="row">Level</th>
                         <td>
                             <a href="#{{ v['class_name'] }}">
-                                {{ v['class_label'] }}
+                                {{ v['class_pref_label'] }}
                             </a>
                          </td>
                     </tr>
@@ -59,29 +59,38 @@
                         </tr>
                     {% endif %}
 
+                    {% if v['examples'] is number %}
+						{% else %}
+						{% set list1 = v['examples'].split('`, `') %}
+						<tr>
+							<th scope="row">Examples</th>
+							<td>
+								<ul class="td-list">
+									{% for item in list1 %}
+										<li><span>{{ item|replace("`","") }}</span></li>
+									{% endfor %}
+								</ul>
+
+							</td>
+						</tr>
+
+						{% endif %}
+
                     {% if v['isRequiredBy'] is number %}
                     {% else %}
+                        {% set list1 = v['isRequiredBy'].split('|') %}
                         <tr>
                             <th scope="row">isRequiredBy</th>
-                            <td>{{ v['isRequiredBy'] }}</td>
-                        </tr>
-                    {% endif %}
-
-                    {% if v['examples'] is number %}
-                    {% else %}
-                        {% set list1 = v['examples'].split('`, `') %}
-                        <tr>
-                            <th scope="row">Examples</th>
                             <td>
                                 <ul class="td-list">
                                     {% for item in list1 %}
-                                        <li><span>{{ item|replace("`","") }}</span></li>
+                                        <li><span>{{ item }}</span></li>
                                     {% endfor %}
                                 </ul>
-
                             </td>
                         </tr>
                     {% endif %}
+
                 </tbody>
             </table>
             {% include 'includes/information-elements/mappings-table.html' %}

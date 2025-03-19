@@ -256,7 +256,13 @@ table tr th.w-18 {
 table tr th.w-26 {
 	width: 26%;
 }
-
+/* Clickable Table -------------------------------------------------*/
+table.linked-table-rows tr {
+	cursor: pointer;
+}
+table.linked-table-rows tr:hover {
+	background-color: rgba(230,230,230,0.3);
+}
 /* RDF Badges ---------------------- */
 .badge.badge-class {
 	background-color: #FFFFFF;

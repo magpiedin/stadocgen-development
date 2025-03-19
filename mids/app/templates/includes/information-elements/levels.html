@@ -12,12 +12,12 @@
             </thead>
             <tbody>
                 {% for idx, v in levels.iterrows() %}
-                <tr id="{{ v['term_local_name'] }}">
-                    <td>{{ v['term_local_name'] }}</td>
-                    <td>{{ v['label'] }}</td>
-                    <td>{{ v['definition'] }}</td>
-                    <td>{{ v['purpose'] }}</td>
-                </tr>
+                    <tr id="{{ v['term_local_name'] }}">
+                        <td>{{ v['level'] }}</td>
+                        <td>{{ v['alt_label'] }}</td>
+                        <td>{{ v['definition'] }}</td>
+                        <td>{{ v['purpose'] }}</td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

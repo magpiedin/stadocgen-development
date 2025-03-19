@@ -36,6 +36,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 	<script src="{{ url_for('static',filename='custom/js/svg-pan-zoom.js') }}"></script>
 	<script src="{{ url_for('static',filename='custom/js/app-script.js') }}"></script>
-
+    <script>
+        $(document).ready(function() {
+			 $('*[data-href]').on('click', function() {
+				  window.location = $(this).data("href");
+			 });
+		});
+    </script>
 </body>
 </html>

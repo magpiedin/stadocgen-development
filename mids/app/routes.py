@@ -4,6 +4,7 @@ from markupsafe import Markup
 import markdown2
 import pandas as pd
 import yaml
+from tabulate import tabulate
 
 relpath = 'app/'
 
@@ -47,7 +48,9 @@ def information_elements():
     information_elements_df = pd.read_csv(information_elements_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     mappings_tsv = str(relpath) + 'data/output/mappings.tsv'
-    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
+    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\n', encoding='utf-8', index_col=0)
+    print(mappings_df.columns.values.tolist())
+    print(tabulate(mappings_df, headers='keys', tablefmt='simple'))
 
     levels_tsv = str(relpath) + 'data/output/levels.tsv'
     levels_df = pd.read_csv(levels_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
@@ -58,8 +61,9 @@ def information_elements():
     information_elements_df = information_elements_df.sort_values(by=['class_name', 'term_local_name'])
 
     levels = levels_df.sort_values(by=['term_local_name'])
+    levels_df['level'] = levels_df['term_local_name'].map(lambda x: x.lstrip('+-').rstrip('MIDS'))
 
-    grpdict2 = information_elements_df.groupby('class_name')[
+    grpdict2 = information_elements_df.groupby('class_pref_label')[
         ['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'term_version_iri', 'term_modified']].apply(
         lambda g: list(map(tuple, g.values.tolist()))).to_dict()
     information_elements_by_level = []
@@ -90,11 +94,11 @@ def mappings():
     with open(home_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-    master_list_tsv = str(relpath) + 'data/output/mids-master-list.csv'
-    master_list_df = pd.read_csv(master_list_tsv, encoding='utf8')
+    master_list_tsv = str(relpath) + 'data/output/master-list.tsv'
+    master_list_df = pd.read_csv(master_list_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
-    mappings_tsv = str(relpath) + 'data/output/mids-mappings.csv'
-    mappings_df = pd.read_csv(mappings_tsv, encoding='utf8')
+    mappings_tsv = str(relpath) + 'data/output/mappings.tsv'
+    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     return render_template('mappings.html',
                            home_markdown=Markup(marked_text),
@@ -106,3 +110,18 @@ def mappings():
                            slug='mappings',
                            mappings=mappings_df,
                            )
+
+@app.route('/about')
+def about():
+    about_mdfile = str(relpath) + 'md/about-content.md'
+    with open(home_mdfile, encoding="utf8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    return render_template('home.html',
+        about_markdown=Markup(marked_text),
+        pageTitle='About MIDS',
+        title=meta['title'],
+        acronym=meta['acronym'],
+        landingPage=meta['links']['landing_page'],
+        githubRepo=meta['links']['github_repository'],
+        slug='home')

@@ -37,9 +37,8 @@ shutil.copy(sourceFile, targetFile)
 # Read
 df = pd.read_csv(targetFile, encoding="utf8",sep='\t')
 
-# Create new preferred label
-df['pref_label'] = 'MIDS ' + df['term_local_name'].astype(str) + ' - ' + df['alt_label']
-df['pref_label'] = df['alt_label'].str.replace('mids', 'Level ')
+df['level'] = df['term_local_name'].str.replace('MIDS','')
+df['pref_label'] = 'MIDS Level ' + df['level']
 
 # RDF Type
 df['rdf_type'] = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Class'

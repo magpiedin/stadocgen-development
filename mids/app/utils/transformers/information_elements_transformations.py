@@ -43,10 +43,10 @@ df = pd.read_csv(targetFile, encoding="utf8",sep='\t')
 
 # Renamez
 df.rename(columns={'MIDSLevel_localName': 'class_name',
-                        'informationElement_localName': 'term_local_name',
-                        'usage': 'purpose',
-                        'recommendations': 'usage_note',
-                        'term_added': 'term_created'
+                    'informationElement_localName': 'term_local_name',
+                    'usage': 'purpose',
+                    'recommendations': 'usage_note',
+                    'term_added': 'term_created'
                    }, inplace=True)
 
 # RDF Type
@@ -57,6 +57,8 @@ df['term_ns_name'] = 'mids:' + df['term_local_name']
 
 df["term_created"] = pd.to_datetime(df["term_created"], format='%d/%m/%Y')
 df["term_modified"] = pd.to_datetime(df["term_modified"], format='%d/%m/%Y')
+
+df['class_pref_label'] = df['class_name'].str.replace('MIDS','MIDS Level ')
 
 # Resave
 df.to_csv(targetFile, encoding="utf8",sep='\t',index=False)

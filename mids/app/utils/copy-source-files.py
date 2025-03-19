@@ -22,6 +22,7 @@ download_md_urls =  [
     "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/information-elements-header.md",
     "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/mappings-header.md",
     "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/sssom-reference.md",
+    "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/about-content.md",
 ]
 target_dir = str(root_dir) + '/mids/app/data/source/mids-repo'
 target_md_dir = str(root_dir) + '/mids/app/md'
@@ -30,8 +31,10 @@ for url in download_urls:
     file_name = os.path.basename(url)
     local_path = os.path.join(target_dir, file_name)
     urllib.request.urlretrieve(url, local_path)
+    print('Downloaded ' + url)
 
 for md_url in download_md_urls:
     md_file_name = os.path.basename(md_url)
     local_md_path = os.path.join(target_md_dir, md_file_name)
     urllib.request.urlretrieve(md_url, local_md_path)
+    print('Downloaded ' + md_url)
