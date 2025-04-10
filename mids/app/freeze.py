@@ -29,7 +29,6 @@ def internal_error(error):
     return render_template('500.html',
                            pageTitle='500 Unknown Error'), 500
 
-
 @app.route('/')
 def home():
     home_mdfile = str(relpath) + 'md/home-content.md'
@@ -51,20 +50,24 @@ def information_elements():
     with open(home_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-    information_elements_csv = str(relpath) + 'data/output/mids-master-list.csv'
-    information_elements_df = pd.read_csv(information_elements_csv, encoding='utf8')
+    information_elements_tsv = str(relpath) + 'data/output/master-list.tsv'
+    information_elements_df = pd.read_csv(information_elements_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
-    mappings_csv = str(relpath) + 'data/output/mids-mappings.csv'
-    mappings_df = pd.read_csv(mappings_csv, encoding='utf8')
+    mappings_tsv = str(relpath) + 'data/output/mappings.tsv'
+    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\r', encoding='utf-8', skipinitialspace=True)
 
-    levels_csv = str(relpath) + 'data/output/mids-levels.csv'
-    levels_df = pd.read_csv(levels_csv, encoding='utf8')
+    levels_tsv = str(relpath) + 'data/output/levels.tsv'
+    levels_df = pd.read_csv(levels_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
+
+    examples_tsv = str(relpath) + 'data/output/levels.tsv'
+    examples_df = pd.read_csv(examples_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     information_elements_df = information_elements_df.sort_values(by=['class_name', 'term_local_name'])
 
     levels = levels_df.sort_values(by=['term_local_name'])
+    levels_df['level'] = levels_df['term_local_name'].map(lambda x: x.lstrip('+-').rstrip('MIDS'))
 
-    grpdict2 = information_elements_df.groupby('class_name')[
+    grpdict2 = information_elements_df.groupby('class_pref_label')[
         ['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'term_version_iri', 'term_modified']].apply(
         lambda g: list(map(tuple, g.values.tolist()))).to_dict()
     information_elements_by_level = []
@@ -91,15 +94,15 @@ def information_elements():
 
 @app.route('/mappings/')
 def mappings():
-    home_mdfile = str(relpath) + 'md/mappings-header.md'
-    with open(home_mdfile, encoding="utf8") as f:
+    mappings_mdfile = str(relpath) + 'md/mappings-header.md'
+    with open(mappings_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-    master_list_csv = str(relpath) + 'data/output/mids-master-list.csv'
-    master_list_df = pd.read_csv(master_list_csv, encoding='utf8')
+    master_list_tsv = str(relpath) + 'data/output/master-list.tsv'
+    master_list_df = pd.read_csv(master_list_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
-    mappings_csv = str(relpath) + 'data/output/mids-mappings.csv'
-    mappings_df = pd.read_csv(mappings_csv, encoding='utf8')
+    mappings_tsv = str(relpath) + 'data/output/mappings.tsv'
+    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\r', encoding='utf-8', skipinitialspace=True)
 
     return render_template('mappings.html',
                            home_markdown=Markup(marked_text),
@@ -111,6 +114,22 @@ def mappings():
                            slug='mappings',
                            mappings=mappings_df,
                            )
+
+@app.route('/about/')
+def about():
+    about_mdfile = str(relpath) + 'md/about-content.md'
+    with open(about_mdfile, encoding="utf8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    return render_template('about.html',
+        about_markdown=Markup(marked_text),
+        pageTitle='About MIDS',
+        title=meta['title'],
+        acronym=meta['acronym'],
+        landingPage=meta['links']['landing_page'],
+        githubRepo=meta['links']['github_repository'],
+        slug='about')
+
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "build":

@@ -1,5 +1,4 @@
-# SSSOM mapping of MIDS elements (DRAFT)
-$${\color{red} This\space document\space is\space still\space in\space draft\space stage! }$$
+# SSSOM mapping of MIDS elements
 
 We intend to use the [SSSOM standard](https://w3id.org/sssom/spec) to effectively map the elements of each MIDS level to terms as used in common domain data standards, such as Darwin Core or ABCD, or even any ad hoc data model linked to an infrastructure such as GBIF or a local collection management system.
 
@@ -71,4 +70,4 @@ The calculation process requires data formulated following the mapped standard t
 
 The binary map is currently no formal defined outcome of MIDS and implementers can calculate it in any way they want. It is useful to show these more detailed results to the data providers, as they make it more clear why a certain MIDS level was (not) met.
 
-# MIDS Mappings
+

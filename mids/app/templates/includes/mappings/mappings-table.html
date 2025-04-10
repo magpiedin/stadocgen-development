@@ -15,7 +15,7 @@
                 </thead>
                 <tbody>
                     {% for idx, v in mappings.iterrows() %}
-                        <tr id="#mapping-{{ v['mapping_id'] }}">
+                        <tr id="mapping-{{ v['mapping_number'] }}">
                             <td><a href="/information-elements#{{ v['sssom_subject_category'] }}">{{ v['sssom_subject_category'] }}</a></td>
                             <td><a href="{{ v['subject_url'] }}">{{ v['sssom_subject_id'] }}</a></td>
                             <td>{{ v['sssom_object_category'] }}</td>

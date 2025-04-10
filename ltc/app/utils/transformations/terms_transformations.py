@@ -8,15 +8,15 @@ path = current_dir.parent.parent
 
 # -------------------------------------------------------
 # Create copies
-term_src = str(path)+'/data/source/ltc_terms_source.csv'
+term_src = str(path)+'/data/sources/ltc_terms_source.csv'
 term_csv = str(path)+'/data/output/ltc-termlist.csv'
 shutil.copy(term_src, term_csv)
 
-ns_src = str(path)+'/data/source/ltc_namespaces.csv'
+ns_src = str(path)+'/data/sources/ltc_namespaces.csv'
 ns_csv = str(path)+'/data/output/ltc-namespaces.csv'
 shutil.copy(ns_src, ns_csv)
 
-dt_src = str(path)+'/data/source/ltc_datatypes.csv'
+dt_src = str(path)+'/data/sources/ltc_datatypes.csv'
 dt_csv = str(path)+'/data/output/ltc-datatypes.csv'
 shutil.copy(dt_src, dt_csv)
 
@@ -26,7 +26,7 @@ ltc_df = pd.read_csv(term_csv, encoding="utf8")
 
 # Rename Columns
 ltc_df.rename(columns={'term_localName': 'term_local_name',
-                       'tdwgutility_organizedInClass': 'class_name',
+                       'tdwgutility_organizedInClass': 'class_uri',
                        'tdwgutility_required': 'is_required',
                        'tdwgutility_repeatable': 'is_repeatable'}, inplace=True)
 # Fix boolean values
@@ -35,7 +35,10 @@ ltc_df['is_required'] = ltc_df['is_required'].replace({'No': 'False'})
 ltc_df['is_repeatable'] = ltc_df['is_repeatable'].replace({'Yes': 'True'})
 ltc_df['is_repeatable'] = ltc_df['is_repeatable'].replace({'No': 'False'})
 # Create compound name column to uniquely identify each record
+ltc_df['class_name'] = ltc_df['class_uri'].str.replace('http://rs.tdwg.org/dwc/terms/attributes/', '')
 ltc_df['compound_name'] = ltc_df[["class_name", "term_local_name"]].apply(".".join, axis=1)
+
+
 # Resave
 ltc_df.to_csv(term_csv, index=False, encoding='utf8')
 

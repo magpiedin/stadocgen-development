@@ -40,7 +40,6 @@ def home():
 @app.route('/information-elements')
 def information_elements():
     home_mdfile = str(relpath) + 'md/information-elements-header.md'
-
     with open(home_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
@@ -48,9 +47,7 @@ def information_elements():
     information_elements_df = pd.read_csv(information_elements_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     mappings_tsv = str(relpath) + 'data/output/mappings.tsv'
-    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\n', encoding='utf-8', index_col=0)
-    print(mappings_df.columns.values.tolist())
-    print(tabulate(mappings_df, headers='keys', tablefmt='simple'))
+    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\r', encoding='utf-8', skipinitialspace=True)
 
     levels_tsv = str(relpath) + 'data/output/levels.tsv'
     levels_df = pd.read_csv(levels_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
@@ -90,18 +87,24 @@ def information_elements():
 
 @app.route('/mappings')
 def mappings():
-    home_mdfile = str(relpath) + 'md/mappings-header.md'
-    with open(home_mdfile, encoding="utf8") as f:
+    mappings_mdfile = str(relpath) + 'md/mappings-header.md'
+    with open(mappings_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    sssom_mdfile = str(relpath) + 'md/sssom-reference.md'
+    with open(sssom_mdfile, encoding="utf8") as f:
+        sssom_marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
 
     master_list_tsv = str(relpath) + 'data/output/master-list.tsv'
     master_list_df = pd.read_csv(master_list_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
 
     mappings_tsv = str(relpath) + 'data/output/mappings.tsv'
-    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
+    mappings_df = pd.read_csv(mappings_tsv, sep='\t', lineterminator='\r', encoding='utf-8', skipinitialspace=True)
 
     return render_template('mappings.html',
-                           home_markdown=Markup(marked_text),
+                           headerMarkdown=Markup(marked_text),
+                           sssomReference=Markup(sssom_marked_text),
                            pageTitle='MIDS Mappings',
                            title=meta['title'],
                            acronym=meta['acronym'],
@@ -114,14 +117,14 @@ def mappings():
 @app.route('/about')
 def about():
     about_mdfile = str(relpath) + 'md/about-content.md'
-    with open(home_mdfile, encoding="utf8") as f:
+    with open(about_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-    return render_template('home.html',
+    return render_template('about.html',
         about_markdown=Markup(marked_text),
         pageTitle='About MIDS',
         title=meta['title'],
         acronym=meta['acronym'],
         landingPage=meta['links']['landing_page'],
         githubRepo=meta['links']['github_repository'],
-        slug='home')
+        slug='about')

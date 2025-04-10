@@ -36,7 +36,7 @@
                         </tr>
                         {%  for idx2,v2 in sssom.iterrows() %}
                             {%  if v2['term_iri'] == v['term_iri'] and v2['subject_category'] == v['class_name'] %}
-                                <tr class="accordion-toggle collapsed"
+                            <tr class="accordion-toggle collapsed"
                                     id="accordion{{ idx }}"
                                     data-bs-toggle="collapse"
                                     data-bs-parent="#accordion{{ idx }}"
@@ -47,7 +47,7 @@
                                     <td data-th="Justification: ">{{ v2.mapping_justification }}</td>
                                     <td class="indicator-td"><i class="fa"></i> </td>
                                 </tr>
-                                <tr class="hide-table-padding">
+                            <tr class="hide-table-padding">
                             <td colspan="4">
                                 <table class="table table-sssom-nested mb-0 nested-table collapse" id="collapse{{  idx2 }}-{{ idx }}">
                                     <tbody>

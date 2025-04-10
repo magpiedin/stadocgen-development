@@ -18,11 +18,12 @@ def copy_files():
 		"https://raw.githubusercontent.com/tdwg/ltc/main/source/terms/mapping/ltc_sssom_mapping.csv",
 	]
 
-	target_dir = str(root_dir) + '/ltc/app/data/source/source-files'
+	target_dir = str(root_dir) + '/ltc/app/data/sources'
 
 	for url in download_urls:
 		file_name = os.path.basename(url)
 		local_path = os.path.join(target_dir, file_name)
+		print(url + ' --> ' + local_path)
 		urllib.request.urlretrieve(url, local_path)
 
 copy_files()

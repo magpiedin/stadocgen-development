@@ -1,0 +1,56 @@
+ <table class="table table-condensed table-sssom table-child" data-toggle="table">
+    <thead>
+        <tr>
+            <th class="text-left" colspan="4">
+                <a href="#sssom{{ idx }}" data-bs-toggle="collapse" class="th-collapser">
+                    <span class="skos-th-label">
+                        Mappings
+                    </span>
+                    <i class="fa"></i>
+                </a>
+            </th>
+            <th class="indicator-td"><i class="fa"></i></th>
+        </tr>
+    </thead>
+    <tbody id="sssom{{ idx }}" class="collapse show">
+        <tr class="accordion-toggle collapsed"
+            id="accordion{{ idx }}"
+            data-bs-toggle="collapse"
+            data-bs-parent="#accordion{{ idx }}"
+            href="#collapse{{ idx2 }}-{{ idx }}"
+            aria-controls="collapse{{ idx2 }}-{{ idx }}">
+            <td data-th="Mapping Property: "></td>
+            <td data-th="Object ID: "></td>
+            <td data-th="Justification: "></td>
+
+            <td class="indicator-td"><i class="fa"></i></td>
+        </tr>
+        <tr class="hide-table-padding">
+            <td colspan="4">
+                <table class="table table-sssom-nested mb-0 nested-table collapse" id="collapse{{  idx2 }}-{{ idx }}">
+                    <tbody>
+                        <tr>
+                            <th>Object Category
+                                 <i class="fa fa-question-circle doc-help-tip" aria-hidden="true" data-bs-toggle="popover"
+                                    data-bs-content="</a>"
+                                    data-bs-title="field name <span class='poplink close');'>x</span>"></i>
+                            </th>
+                            <td>{{  v2['object_category'] }}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-center"><a href="{{ url_for('docResources') }}#sssom-ref" class="text-center">SSSOM Specification</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+ </table>

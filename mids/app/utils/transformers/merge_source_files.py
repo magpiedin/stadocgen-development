@@ -57,10 +57,15 @@ if 'sssom_reviewer_label' not in df_abcd:
 
 # Concatenate SSSOM Dataframes
 df_mappings = pd.concat([df_abcd,df_dwc])
+df_mappings.reset_index(inplace=True,drop=True)
 
 # Add term column with namespace prefix
 df_mappings['term_local_name'] = df_mappings['sssom_subject_id'].str.replace('mids:', '')
-df_mappings.index.name = 'mapping_id'
+# Create auto-increment column
+df_mappings.insert(0, 'mapping_number', range(1, 1 + len(df_mappings)))
+
+
+# Convert auto-increment Float to Integer
 
 # Write Final Mappings files
-df_mappings.to_csv(mappingsFile, index=True, encoding='utf8',sep='\t')
+df_mappings.to_csv(mappingsFile, encoding='utf8',sep='\t')
