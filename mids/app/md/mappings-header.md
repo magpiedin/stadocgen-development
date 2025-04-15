@@ -16,13 +16,15 @@ We make use of a separate serialisation for the MappingSet metadata block (in YA
 
 The files should take the `mapping_set_id` from the metadata block as a filename, with a suffix of `.sssom.tsv` or `.sssom.yml`. There are currently no rules set for the generation of this `mapping_set_id`.
 
-## Mapping specification
+
+## Mapping specification  <span id="1-mapping-specification"></span>
 ### General recommendations
 When a field has multiple values, it is recommended to delimit it using the `|` (pipe) character. It is optional to make this enumeration more human-readable by including whitespace around it, i.e. padding the pipe with spaces.
 
 Therefore, when interpreting a `|`-delimited string, any trailing whitespace must be ignored.
 
 Any SSSOM mapping files should be UTF-8 encoded.
+
 
 ### Composition of the MappingSet
 The MappingSet must be a valid YAML text file and include as its first element a `curie_map` which includes definitions of all namespaces used in the Mappings. 

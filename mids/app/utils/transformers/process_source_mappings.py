@@ -36,7 +36,7 @@ df_dwc.columns = df_dwc.columns.str.replace(':','_', regex=True)
 # Create persistent URLs
 df_dwc['object_url'] = df_dwc['sssom_object_id'].str.replace('dwc:','http://rs.tdwg.org/dwc/terms/')
 df_dwc['subject_url'] = df_dwc['sssom_subject_id'].str.replace('mids:','https://tdwg.github.io/mids/information-elements#')
-
+df_dwc['object_namespace'] = 'dwc'
 
 df_dwc.to_csv(dwc_sssom, index=False, encoding='utf8',sep='\t')
 
@@ -59,6 +59,7 @@ df_abcd.columns = df_abcd.columns.str.replace(':','_', regex=True)
 
 df_abcd['object_url'] = df_abcd['sssom_object_id'].str.replace('abcd:','http://rs.tdwg.org/abcd/terms/')
 df_abcd['subject_url'] = df_abcd['sssom_subject_id'].str.replace('mids:','https://tdwg.github.io/mids/information-elements#')
+df_abcd['object_namespace'] = 'abcd'
 
 df_abcd.to_csv(abcd_sssom, index=False, encoding='utf8',sep='\t')
 

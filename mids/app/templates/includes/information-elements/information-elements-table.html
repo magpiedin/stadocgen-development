@@ -91,7 +91,20 @@
                                 </td>
                             </tr>
                         {% endif %}
-
+                         {% if v['examples_list'] is number %}
+                        {% else %}
+                            {% set list2 = v['examples_list'].split('|') %}
+                            <tr>
+                                <th scope="row">Examples</th>
+                                <td>
+                                    <ul class="block-list">
+                                        {% for item2 in list2 %}
+                                            <li><span>{{ item2 }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
                 {% include 'includes/information-elements/mappings-table.html' %}
@@ -99,3 +112,7 @@
         </div>
     {% endif %}
 {% endfor %}
+
+
+Examples
+

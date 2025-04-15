@@ -65,7 +65,5 @@ df_mappings['term_local_name'] = df_mappings['sssom_subject_id'].str.replace('mi
 df_mappings.insert(0, 'mapping_number', range(1, 1 + len(df_mappings)))
 
 
-# Convert auto-increment Float to Integer
-
 # Write Final Mappings files
 df_mappings.to_csv(mappingsFile, encoding='utf8',sep='\t')

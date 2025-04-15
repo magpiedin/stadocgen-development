@@ -16,6 +16,7 @@ def copy_files():
 		"https://raw.githubusercontent.com/tdwg/ltc/main/source/terms/ltc_namespaces.csv",
 		"https://raw.githubusercontent.com/tdwg/ltc/main/source/terms/ltc_terms_source.csv",
 		"https://raw.githubusercontent.com/tdwg/ltc/main/source/terms/mapping/ltc_sssom_mapping.csv",
+		"https://raw.githubusercontent.com/tdwg/rs.tdwg.org/refs/heads/master/latimer/latimer-translations.csv"
 	]
 
 	target_dir = str(root_dir) + '/ltc/app/data/sources'
