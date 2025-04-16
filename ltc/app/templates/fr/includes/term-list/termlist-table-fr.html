@@ -31,26 +31,26 @@
                         </tr>
 						<tr>
 							<th scope="row">Label</th>
-							<td>{{ v['label'] }}</td>
+							<td>{{ v['label_fr'] }}</td>
 						</tr>
 						<tr>
 							<th scope="row">Définition</th>
-							<td>{{ v['definition'] }}</td>
+							<td>{{ v['definition_fr'] }}</td>
 						</tr>
 
-						{% if v['usage'] is number %}
+						{% if v['usage_fr'] is number %}
 						{% else %}
 						<tr>
 							<th scope="row">Utilisation</th>
-							<td>{{ v['usage'] }}</td>
+							<td>{{ v['usage_fr'] }}</td>
 						</tr>
 						{% endif %}
 
-						{% if v['notes'] is number %}
+						{% if v['notes_fr'] is number %}
 						{% else %}
 						<tr>
 							<th scope="row">Notes</th>
-							<td>{{ v['notes'] }}</td>
+							<td>{{ v['notes_fr'] }}</td>
 						</tr>
 						{% endif %}
 

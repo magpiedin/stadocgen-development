@@ -4,4 +4,5 @@
 # List of translations for a standard. This is used to generate translation ouput files using columns grouped by language in the source translations file. A translation output file will be generated for each language listed in this file.
 # 2025-04-12
 Languages:
-  - fr: French
+- code: fr
+  label: French
