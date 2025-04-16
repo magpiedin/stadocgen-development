@@ -16,16 +16,15 @@ namespace = 'ltc'
 current_dir = Path().absolute()
 root_dir = globals.get_project_root()
 project_dir = str(root_dir) +'/'+namespace+'/app'
-translations_yml = str(root_dir)+'/'+namespace+'/app/utils/translations.yml'
 
 
 # Read translations YAML file
+translations_yml = str(root_dir)+'/'+namespace+'/app/utils/translations.yml'
 yml_dict = []
 for yf in glob.glob(translations_yml, recursive=True):
     with open(yf, 'r') as f:
         meta = yaml.load(f, Loader=yaml.FullLoader)
         yml_dict.append(meta)
-
 df_yml = pd.DataFrame.from_dict(yml_dict)
 
 # -------------------------------------------------------
@@ -56,10 +55,11 @@ for k in meta['Languages']:
     # Merge Term List with Translations
     #merged_df = pd.merge(terms_df, filtered_df[['term_local_name', 'label_fr', 'definition_fr', 'usage_fr', 'notes_fr']], on="term_local_name", how="inner")
 
-    merged_left = pd.merge(left=terms_df, right=filtered_df, how='left', left_on='term_local_name', right_on='term_localName')
+    merged_df = pd.merge(left=terms_df, right=filtered_df, how='left', left_on='term_local_name', right_on='term_localName')
 
-
-    translations_target = str(project_dir) + '/data/output/' + lang + '_ltc_translations.csv'
+    fr_translations_target = str(project_dir) + '/data/output/' + lang + '_ltc_translations.csv'
+    translations_target = str(project_dir) + '/data/output/ltc-termlist.csv'
 
     # Write Term list with translation to file
-    merged_left.to_csv(translations_target, index=False, encoding='utf8')
+    merged_df.to_csv(fr_translations_target, index=False, encoding='utf8', lineterminator='\r', skip_blank_lines=True)
+    merged_df.to_csv(translations_target, index=False, encoding='utf8', lineterminator='\r', skip_blank_lines=True)

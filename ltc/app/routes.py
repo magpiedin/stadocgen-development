@@ -1,9 +1,11 @@
 from app import app
-from flask import render_template
+from flask import render_template, abort, redirect
 from markupsafe import Markup
 import markdown2
 import pandas as pd
 import yaml
+import glob
+
 
 with open('app/meta.yml') as metadata:
     meta = yaml.safe_load(metadata)
@@ -40,12 +42,41 @@ def home():
                            githubRepo=meta['github-repo'],
                            slug='home'
                            )
-@app.route('/terms')
-def terms():
-    header_mdfile = 'app/md/termlist-header.md'
 
-    with open(header_mdfile, encoding="utf-8") as f:
-        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+# Write French Translation of Terms Page
+@app.route('/terms/', defaults={'lang': None})
+@app.route('/terms/<lang>', methods=['GET'])
+def terms(lang = None):
+
+    # Read translations YAML file
+    translations_yml = 'app/utils/translations.yml'
+    yml_dict = []
+    for yf in glob.glob(translations_yml, recursive=True):
+        with open(yf, 'r', encoding='utf8') as f:
+            lang_meta = yaml.load(f, Loader=yaml.FullLoader)
+            yml_dict.append(lang_meta)
+
+
+    # Load Translated Markdown Content
+    if lang:
+        print(lang)
+        for item in lang_meta['Languages']:
+            if item['code'] == lang:
+                language_code = item['code']
+                language_label = item['label']
+                header_mdfile = 'app/md/termlist-header-'+lang+'.md'
+                with open(header_mdfile, encoding="utf-8") as f:
+                    marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+            else:
+                abort(404)
+    else:
+        language_code = 'en'
+        language_label = ''
+        header_mdfile = 'app/md/termlist-header.md'
+        with open(header_mdfile, encoding="utf-8") as f:
+            marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+
 
     # Terms
     terms_csv = 'app/data/output/ltc-termlist.csv'
@@ -54,11 +85,7 @@ def terms():
     sssom_csv = 'app/data/output/ltc-sssom.csv'
     sssom_df = pd.read_csv(sssom_csv, encoding='utf-8')
 
-    terms_df['examples'] = terms_df['examples'].str.replace('"', '')
-    terms_df['definition'] = terms_df['definition'].str.replace('"', '')
-    terms_df['usage'] = terms_df['usage'].str.replace('"', '')
-    terms_df['notes'] = terms_df['notes'].str.replace('"', '')
-
+    # Merge SSSOM Mappings with Terms
     terms_skos_df = pd.merge(
         terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label', 'mapping_justification' ]],
         on=['compound_name'], how='left'
@@ -68,13 +95,6 @@ def terms():
 
     # Unique Class Names
     ltcCls = terms_df['class_name'].dropna().unique()
-
-    # Generate Unique Terms List
-    # uniqueTerms = terms_df.drop_duplicates('term_local_name').sort_values('term_local_name')
-    # selectCols = ['class_name','term_ns_name','term_local_name','term_iri','term_modified','term_version_iri','label','definition','usage','notes','examples','datatype','is_required','is_repeatable','rdf_type']
-    # groupCols = ['term_ns_name','term_local_name','term_iri','term_modified','term_version_iri','label','definition','usage','notes','examples','datatype','is_required','is_repeatable','rdf_type']
-    # unique_terms_df = terms_df[selectCols].groupby(groupCols)['class_name'].agg([('class_name', ', '.join)]).reset_index()
-    # uniqueTerms = unique_terms_df.drop_duplicates('term_local_name').sort_values('term_local_name')
 
     # Terms by Class
     grpdict2 = terms_df.groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name','term_version_iri','term_modified']].apply(
@@ -94,13 +114,15 @@ def terms():
                            sssom=sssom_df,
                            termsByClass=termsByClass,
                            uniqueTerms=terms,
-                           pageTitle='Home',
+                           pageTitle='Term List',
                            title=meta['title'],
                            acronym=meta['acronym'],
                            landingPage=meta['documentation-landing-page'],
                            githubRepo=meta['github-repo'],
-                           slug='term-list'
-    )
+                           slug='term-list',
+                           languageCode=language_code,
+                           languageLabel=language_label
+                           )
 
 
 @app.route('/quick-reference')
@@ -177,68 +199,4 @@ def docResources():
                            slug='resources'
     )
 
-# Write French Translation of Terms Page
-@app.route('/terms-lang/<lang>')
-def termsTranslation(lang):
-    if lang:
-        if lang == 'fr':
-            header_mdfile = 'app/md/termlist-header-fr.md'
 
-            with open(header_mdfile, encoding="utf-8") as f:
-                marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
-
-            # Terms
-            terms_csv = 'app/data/output/fr_ltc_translations.csv'
-            terms_df = pd.read_csv(terms_csv, encoding='utf-8')
-
-            sssom_csv = 'app/data/output/ltc-sssom.csv'
-            sssom_df = pd.read_csv(sssom_csv, encoding='utf-8')
-
-            terms_df['examples'] = terms_df['examples'].str.replace('"', '')
-            terms_df['definition_fr'] = terms_df['definition_fr'].str.replace('"', '')
-            terms_df['usage_fr'] = terms_df['usage_fr'].str.replace('"', '')
-            terms_df['notes_fr'] = terms_df['notes_fr'].str.replace('"', '')
-
-    terms_skos_df = pd.merge(
-        terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label', 'mapping_justification' ]],
-        on=['compound_name'], how='left'
-    )
-
-    terms = terms_skos_df.sort_values(by=['class_name','term_local_name'])
-
-    # Unique Class Names
-    ltcCls = terms_df['class_name'].dropna().unique()
-
-    # Generate Unique Terms List
-    # uniqueTerms = terms_df.drop_duplicates('term_local_name').sort_values('term_local_name')
-    # selectCols = ['class_name','term_ns_name','term_local_name','term_iri','term_modified','term_version_iri','label','definition','usage','notes','examples','datatype','is_required','is_repeatable','rdf_type']
-    # groupCols = ['term_ns_name','term_local_name','term_iri','term_modified','term_version_iri','label','definition','usage','notes','examples','datatype','is_required','is_repeatable','rdf_type']
-    # unique_terms_df = terms_df[selectCols].groupby(groupCols)['class_name'].agg([('class_name', ', '.join)]).reset_index()
-    # uniqueTerms = unique_terms_df.drop_duplicates('term_local_name').sort_values('term_local_name')
-
-    # Terms by Class
-    grpdict2 = terms_df.groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name','term_version_iri','term_modified']].apply(
-        lambda g: list(map(tuple, g.values.tolist()))).to_dict()
-    termsByClass = []
-
-    for i in grpdict2:
-        termsByClass.append({
-            'class': i,
-            'termlist': grpdict2[i]
-        })
-
-    return render_template('term-list-fr.html',
-                           headerMarkdown=Markup(marked_text),
-                           ltcCls=ltcCls,
-                           terms=terms,
-                           sssom=sssom_df,
-                           termsByClass=termsByClass,
-                           uniqueTerms=terms,
-                           pageTitle='Term List',
-                           pageLead='Français',
-                           title=meta['title'],
-                           acronym=meta['acronym'],
-                           landingPage=meta['documentation-landing-page'],
-                           githubRepo=meta['github-repo'],
-                           slug='term-list'
-                           )

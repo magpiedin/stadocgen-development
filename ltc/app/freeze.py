@@ -1,16 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 from flask_frozen import Freezer
 from markupsafe import Markup
-import sys
 import markdown2
 import pandas as pd
 import yaml
+import glob
+import sys
 app = Flask(__name__, template_folder='templates')
 freezer = Freezer(app)
 
 #app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['FREEZER_DESTINATION'] = 'build'
-app.config['FREEZER_RELATIVE_URLS'] = True
+app.config['FREEZER_RELATIVE_URLS'] = False
+app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
 #app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
 
 with open('meta.yml') as metadata:
@@ -44,38 +46,60 @@ def home():
                            slug='home'
                            )
 
-@app.route('/terms/')
-def terms():
-    header_mdfile = 'md/termlist-header.md'
+# Write French Translation of Terms Page
+@app.route('/terms/', defaults={'lang': None})
+@app.route('/terms/<lang>')
+def terms(lang = None):
 
-    with open(header_mdfile, encoding="utf8") as f:
-        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+    # Read translations YAML file
+    translations_yml = 'utils/translations.yml'
+    yml_dict = []
+    for yf in glob.glob(translations_yml, recursive=True):
+        with open(yf, 'r', encoding='utf8') as f:
+            lang_meta = yaml.load(f, Loader=yaml.FullLoader)
+            yml_dict.append(lang_meta)
+
+
+    # Load Translated Markdown Content
+    if lang:
+        for item in lang_meta['Languages']:
+            if item['code'] == lang:
+                language_code = item['code']
+                language_label = item['label']
+                header_mdfile = 'md/termlist-header-'+lang+'.md'
+                with open(header_mdfile, encoding="utf-8") as f:
+                    marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+            else:
+                abort(404)
+    else:
+        language_code = 'en'
+        language_label = ''
+        header_mdfile = 'md/termlist-header.md'
+        with open(header_mdfile, encoding="utf-8") as f:
+            marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+
 
     # Terms
     terms_csv = 'data/output/ltc-termlist.csv'
-    terms_df = pd.read_csv(terms_csv, encoding='utf8')
+    terms_df = pd.read_csv(terms_csv, encoding='utf-8')
 
     sssom_csv = 'data/output/ltc-sssom.csv'
-    sssom_df = pd.read_csv(sssom_csv, encoding='utf8')
+    sssom_df = pd.read_csv(sssom_csv, encoding='utf-8')
 
-    terms_df['examples'] = terms_df['examples'].str.replace('"', '')
-    terms_df['definition'] = terms_df['definition'].str.replace('"', '')
-    terms_df['usage'] = terms_df['usage'].str.replace('"', '')
-    terms_df['notes'] = terms_df['notes'].str.replace('"', '')
-
+    # Merge SSSOM Mappings with Terms
     terms_skos_df = pd.merge(
-        terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label',
-                            'mapping_justification']],
+        terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label', 'mapping_justification' ]],
         on=['compound_name'], how='left'
     )
 
-    terms = terms_skos_df.sort_values(by=['class_name', 'term_local_name'])
+    terms = terms_skos_df.sort_values(by=['class_name','term_local_name'])
 
     # Unique Class Names
     ltcCls = terms_df['class_name'].dropna().unique()
 
-    grpdict2 = terms_df.groupby('class_name')[
-        ['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'term_version_iri', 'term_modified']].apply(
+    # Terms by Class
+    grpdict2 = terms_df.groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name','term_version_iri','term_modified']].apply(
         lambda g: list(map(tuple, g.values.tolist()))).to_dict()
     termsByClass = []
 
@@ -92,12 +116,14 @@ def terms():
                            sssom=sssom_df,
                            termsByClass=termsByClass,
                            uniqueTerms=terms,
-                           pageTitle='Home',
+                           pageTitle='Term List',
                            title=meta['title'],
                            acronym=meta['acronym'],
                            landingPage=meta['documentation-landing-page'],
                            githubRepo=meta['github-repo'],
-                           slug='term-list'
+                           slug='term-list',
+                           languageCode=language_code,
+                           languageLabel=language_label
                            )
 
 @app.route('/quick-reference/')
@@ -142,7 +168,7 @@ def quickReference():
                            grplists=grplists,
                            requiredTerms=required_df,
                            requiredClasses=required_classes_df,
-                           pageTitle='Home',
+                           pageTitle='Quick Reference',
                            title=meta['title'],
                            acronym=meta['acronym'],
                            landingPage=meta['documentation-landing-page'],
@@ -164,7 +190,7 @@ def docResources():
     return render_template('resources.html',
                            headerMarkdown=Markup(marked_text),
                            sssomRefMarkdown=Markup(marked_sssom),
-                           pageTitle='Home',
+                           pageTitle='Resources',
                            title=meta['title'],
                            acronym=meta['acronym'],
                            landingPage=meta['documentation-landing-page'],
