@@ -1,6 +1,10 @@
 # Latimer Core Transformation Scripts
 Sequence of csv transformations for the purposes of generating documentation from source csv files
 
+## Sequence
+Scripts must be run in a specific order to produce production files
+sssom_transformations.py > terms_transformations.py > translation_transformations.py
+
 ### SKOS and SSSOM Mappings  
 Transforms both mapping files  
 Script:skos_transformations.py  
