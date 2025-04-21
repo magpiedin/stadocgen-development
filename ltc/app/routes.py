@@ -45,7 +45,7 @@ def home():
 
 # Write French Translation of Terms Page
 @app.route('/terms/', defaults={'lang': None})
-@app.route('/terms/<lang>', methods=['GET'])
+@app.route('/terms/<lang>/', methods=['GET'])
 def terms(lang = None):
 
     # Read translations YAML file
@@ -79,7 +79,8 @@ def terms(lang = None):
 
 
     # Terms
-    terms_csv = 'app/data/output/ltc-termlist.csv'
+    #terms_csv = 'app/data/output/ltc-translations-termlist.csv'
+    terms_csv = 'app/data/output/ltc-fr-termlist.csv'
     terms_df = pd.read_csv(terms_csv, encoding='utf-8')
 
     sssom_csv = 'app/data/output/ltc-sssom.csv'
@@ -106,7 +107,7 @@ def terms(lang = None):
             'class': i,
             'termlist': grpdict2[i]
         })
-    print(terms)
+    print(terms.columns.to_list())
     return render_template('term-list.html',
                            headerMarkdown=Markup(marked_text),
                            ltcCls=ltcCls,
