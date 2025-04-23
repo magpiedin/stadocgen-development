@@ -1,10 +1,10 @@
-title:                        Mineralogy Extension
-acronym:                      MinExt
-documentation-landing-page:   # Landing Page URL of the standard documentation
-github-repo:                  # URL of the GitHub Repo
-source-data-files:            # Full URL to Source Files as YAML List
-
-source-md-files:              # Full URL of Source Markdown content files as YAML List
-
-last-modified:                # Date file last modified
-comments:                     # General remarks about the StaDocGen instance for standard
+title: Mineralogy Extension
+stadocgen-path: /minext
+acronym: MinExt
+documentation-landing-page: https://mineralogy.tdwg.org
+github-repo: https://github.com/tdwg/mineralogy
+source-data-files:
+source-md-files:
+last-modified: 20250419
+comments:
+status: Draft

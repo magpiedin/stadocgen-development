@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% block main %}
-<main class="docs-home">
-
+<main class="wrapper home-content">
 	{% include 'includes/home/page-header.html' %}
 	<div class="container content">
 		<div class="row">
             <div class="col-md-10 col-lg-8 mx-auto">
+                 {%  if ( status == 'Draft') %}
+                        <h2><span style="color:red">DRAFT</span></h2>
+                    {% endif %}
                 {{ home_markdown }}
+                <p><em>Last Modified: {{ lastModified }}</em></p>
             </div>
         </div>
     </div>
