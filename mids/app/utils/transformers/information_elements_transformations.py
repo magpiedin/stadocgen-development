@@ -44,7 +44,7 @@ df = pd.read_csv(target_file, encoding="utf8",sep='\t')
 df.rename(columns={'MIDSLevel_localName': 'class_name',
                     'informationElement_localName': 'term_local_name',
                     'usage': 'purpose',
-                    'recommendations': 'usage_note',
+                    'recommendations': 'usage',
                     'term_added': 'term_created'
                    }, inplace=True)
 

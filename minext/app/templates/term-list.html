@@ -21,10 +21,13 @@
                         <h2><span style="color:red">DRAFT</span></h2>
                     {% endif %}
 	                {{ headerMarkdown }}
+                         {% include 'includes/term-list/termlist-metadata-terms.html' %}
+
 				</div>
                 {% if languageCode is not none %}
                     {% if languageCode == 'en' %}
                         {% include 'includes/term-list/termlist-index.html' %}
+
                         {% include 'includes/term-list/termlist-table.html' %}
                     {% endif %}
                 {% endif %}

@@ -110,7 +110,7 @@ for yf in glob.glob(translations_yml, recursive=True):
     for k in meta['Languages']:
         lang = k['code']
         translations_source = str(path) + '/data/output/ltc-' + lang + '-translations.csv'
-        translations_target= str(path) + '/data/output/ltc-' + lang + '-termlist.csv'
+        translations_target= str(path) + '/data/output/ltc-translations-termlist.csv'
 
         translations_df = pd.read_csv(translations_source, encoding='utf8')
 

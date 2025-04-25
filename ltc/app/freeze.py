@@ -168,7 +168,7 @@ def quickReference():
                            grplists=grplists,
                            requiredTerms=required_df,
                            requiredClasses=required_classes_df,
-                           pageTitle='Quick Reference',
+                           pageTitle='Quick Reference Guide',
                            title=meta['title'],
                            acronym=meta['acronym'],
                            landingPage=meta['documentation-landing-page'],

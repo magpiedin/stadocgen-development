@@ -47,6 +47,9 @@ df['rdf_type'] = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Class'
 df['term_ns_name'] = 'mids:' + df['term_local_name']
 df['namespace'] = 'mids:'
 
+df.rename(columns={'notes': 'usage'
+                   }, inplace=True)
+
 # Resave timestamped
 df.to_csv(targetFile, index=False, encoding='utf8',sep='\t')
 

@@ -39,16 +39,8 @@
                         {% if v['usage'] is number %}
                         {% else %}
                             <tr>
-                                <th scope="row">Recommendations</th>
-                                <td>{{ v['usage'] }}</td>
-                            </tr>
-                        {% endif %}
-
-                        {% if v['notes'] is number %}
-                        {% else %}
-                            <tr>
                                 <th scope="row">Usage Note</th>
-                                <td>{{ v['notes'] }}</td>
+                                <td>{{ v['usage'] }}</td>
                             </tr>
                         {% endif %}
 

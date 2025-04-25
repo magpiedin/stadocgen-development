@@ -25,4 +25,8 @@ $(document).ready(function () {
 		}
 	});
 
+	if (location.hash !== null && location.hash !== "") {
+		console.log(location.hash);
+		$(location.hash + ".collapsed").collapse("show");
+	}
 });
