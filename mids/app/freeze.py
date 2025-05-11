@@ -129,6 +129,25 @@ def mappings():
                            mappings=mappings_df,
                            )
 
+@app.route('/tools/')
+def tools():
+    content_mdfile = str(relpath) + 'md/tools-content.md'
+    with open(content_mdfile, encoding="utf8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    with open(str(relpath) + 'md/tools.yml') as tools_yml:
+        tools_meta = yaml.safe_load(tools_yml)
+
+    return render_template('tools.html',
+        content_markdown=Markup(marked_text),
+        tools_metadata=tools_meta,
+        pageTitle='MIDS Tools',
+        title=meta['title'],
+        acronym=meta['acronym'],
+        landingPage=meta['links']['landing_page'],
+        githubRepo=meta['links']['github_repository'],
+        slug='tools')
+
 @app.route('/about/')
 def about():
     about_mdfile = str(relpath) + 'md/about-content.md'
@@ -143,7 +162,6 @@ def about():
         landingPage=meta['links']['landing_page'],
         githubRepo=meta['links']['github_repository'],
         slug='about')
-
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "build":

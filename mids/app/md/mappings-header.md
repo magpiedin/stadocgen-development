@@ -1,4 +1,5 @@
 # SSSOM mapping of MIDS elements
+> Document Status: <span style="color:red;">In Draft</span>
 
 We intend to use the [SSSOM standard](https://w3id.org/sssom/spec) to effectively map the elements of each MIDS level to terms as used in common domain data standards, such as Darwin Core or ABCD, or even any ad hoc data model linked to an infrastructure such as GBIF or a local collection management system.
 
@@ -16,15 +17,13 @@ We make use of a separate serialisation for the MappingSet metadata block (in YA
 
 The files should take the `mapping_set_id` from the metadata block as a filename, with a suffix of `.sssom.tsv` or `.sssom.yml`. There are currently no rules set for the generation of this `mapping_set_id`.
 
-
-## Mapping specification  <span id="1-mapping-specification"></span>
+## Mapping specification
 ### General recommendations
 When a field has multiple values, it is recommended to delimit it using the `|` (pipe) character. It is optional to make this enumeration more human-readable by including whitespace around it, i.e. padding the pipe with spaces.
 
 Therefore, when interpreting a `|`-delimited string, any trailing whitespace must be ignored.
 
 Any SSSOM mapping files should be UTF-8 encoded.
-
 
 ### Composition of the MappingSet
 The MappingSet must be a valid YAML text file and include as its first element a `curie_map` which includes definitions of all namespaces used in the Mappings. 
@@ -72,4 +71,4 @@ The calculation process requires data formulated following the mapped standard t
 
 The binary map is currently no formal defined outcome of MIDS and implementers can calculate it in any way they want. It is useful to show these more detailed results to the data providers, as they make it more clear why a certain MIDS level was (not) met.
 
-
+# MIDS Mappings

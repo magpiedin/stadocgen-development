@@ -23,7 +23,8 @@ download_md_urls =  [
     "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/mappings-header.md",
     "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/sssom-reference.md",
     "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/about-content.md",
-    "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/resources.md",
+    "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/md/tools-content.md",
+    "https://raw.githubusercontent.com/tdwg/mids/refs/heads/main/source/tools/tools.yml"
 ]
 target_dir = str(root_dir) + '/mids/app/data/source/mids-repo'
 target_md_dir = str(root_dir) + '/mids/app/md'

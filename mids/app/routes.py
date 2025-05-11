@@ -25,12 +25,13 @@ def internal_error(error):
 @app.route('/')
 def home():
     home_mdfile = str(relpath) + 'md/home-content.md'
+    title = meta['title'] + ' (MIDS)'
     with open(home_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
     return render_template('home.html',
                            home_markdown=Markup(marked_text),
                            pageTitle='Home',
-                           title=meta['title'],
+                           title=title,
                            acronym=meta['acronym'],
                            landingPage=meta['links']['landing_page'],
                            githubRepo=meta['links']['github_repository'],
@@ -47,7 +48,7 @@ def information_elements():
     information_elements_tsv = str(relpath) + 'data/output/master-list.tsv'
     information_elements_df = pd.read_csv(information_elements_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
     information_elements_df = information_elements_df.sort_values(by=['class_name', 'term_local_name'])
-
+    print(information_elements_df['usage'])
     # Read MIDS Levels (rdfs:Class)
     levels_tsv = str(relpath) + 'data/output/levels.tsv'
     levels_df = pd.read_csv(levels_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
@@ -114,7 +115,7 @@ def mappings():
     return render_template('mappings.html',
                            headerMarkdown=Markup(marked_text),
                            sssomReference=Markup(sssom_marked_text),
-                           pageTitle='MIDS Mappings',
+                           pageTitle='Mappings',
                            title=meta['title'],
                            acronym=meta['acronym'],
                            landingPage=meta['links']['landing_page'],
@@ -122,6 +123,25 @@ def mappings():
                            slug='mappings',
                            mappings=mappings_df,
                            )
+
+@app.route('/tools')
+def tools():
+    content_mdfile = str(relpath) + 'md/tools-content.md'
+    with open(content_mdfile, encoding="utf8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    with open(str(relpath) + 'md/tools.yml') as tools_yml:
+        tools_meta = yaml.safe_load(tools_yml)
+
+    return render_template('tools.html',
+        content_markdown=Markup(marked_text),
+        tools_metadata=tools_meta,
+        pageTitle='Tools',
+        title=meta['title'],
+        acronym=meta['acronym'],
+        landingPage=meta['links']['landing_page'],
+        githubRepo=meta['links']['github_repository'],
+        slug='tools')
 
 @app.route('/about')
 def about():
@@ -131,7 +151,7 @@ def about():
 
     return render_template('about.html',
         about_markdown=Markup(marked_text),
-        pageTitle='About MIDS',
+        pageTitle='About',
         title=meta['title'],
         acronym=meta['acronym'],
         landingPage=meta['links']['landing_page'],

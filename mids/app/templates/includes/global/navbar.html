@@ -2,7 +2,8 @@
 	<div class="container">
 	    <a class="navbar-brand d-flex align-items-center" href="{{ landingPage }}">
 	        <img class="me-3" src="https://tdwg.github.io/chrono/assets/theme/images/tdwg-logo-short.svg" alt="{{  title }}">
-            {{ title }}
+            <span class="d-none d-sm-block d-md-none">{{ acronym }}</span> <!-- Hidden on md and above -->
+            <span class="d-none d-md-block">{{ title }}</span> <!-- visible md and above -->
 	    </a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
 			Menu <i class="fas fa-bars"></i>
@@ -21,7 +22,11 @@
 					<a class="nav-link {{ 'nav-link-active' if slug == 'mappings' }}"
                        href="{{ url_for('mappings') }}">Mappings</a>
 				</li>
-                 <li class="navbar-item">
+                <li class="navbar-item">
+					<a class="nav-link {{ 'nav-link-active' if slug == 'tools' }}"
+                       href="{{ url_for('tools') }}">Tools</a>
+				</li>
+                <li class="navbar-item">
 					<a class="nav-link {{ 'nav-link-active' if slug == 'about' }}"
                        href="{{ url_for('about') }}">About</a>
 				</li>

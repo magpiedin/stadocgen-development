@@ -52,6 +52,12 @@
                             </tr>
                         {% endif %}
 
+                            <tr>
+                                <th scope="row">Usage</th>
+                                <td>{{ v['usage'] }}</td>
+                            </tr>
+
+
                         {% if v['examples'] is number %}
                             {% else %}
                             {% set list1 = v['examples'].split('`, `') %}
@@ -104,7 +110,3 @@
         </div>
     {% endif %}
 {% endfor %}
-
-
-Examples
-
