@@ -79,8 +79,8 @@ def terms(lang = None):
 
 
     # Terms
-    #terms_csv = 'app/data/output/ltc-translations-termlist.csv'
-    terms_csv = 'app/data/output/ltc-fr-termlist.csv'
+    terms_csv = 'app/data/output/ltc-translations-termlist.csv'
+    #terms_csv = 'app/data/output/ltc-fr-termlist.csv'
     terms_df = pd.read_csv(terms_csv, encoding='utf-8')
 
     sssom_csv = 'app/data/output/ltc-sssom.csv'

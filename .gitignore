@@ -261,3 +261,5 @@ docs/build
 /ltc/app/utils/analysis/output/ltc-working-terms.csv
 /ltc/app/utils/analysis/output/ltc-working-terms-copy.xlsx
 /ltc/app/utils/analysis/output/unique.csv
+/.idea
+/.stadocgen-venv

@@ -10,8 +10,9 @@
       <excludeFolder url="file://$MODULE_DIR$/app/build/terms" />
       <excludeFolder url="file://$MODULE_DIR$/app/utils/analysis/output" />
       <excludeFolder url="file://$MODULE_DIR$/stadocgen-dev-venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.stadocgen-venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.14 (stadocgen)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
