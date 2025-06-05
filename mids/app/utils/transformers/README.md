@@ -9,6 +9,7 @@ This directory contains the data transformation scripts run prior to generating 
 2. levels_transformations.py
 3. information_elements_transformations.py
 4. merge_source_files.py
+5. merge_examples.py
 
 ## Basic Workflow
 Sequence: process_source_mappings.py > levels_transformations.py > information_elements_transformations.py > merge_source_files.py 

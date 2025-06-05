@@ -1,12 +1,10 @@
 term_local_name	example
 PhysicalSpecimenID	http://herbarium.bgbm.org/object/B100277113
-PhysicalSpecimenID	(O-F-2201154, 30eff5c2-97b4-4eeb-bb46-8c12a1cf0f37, 12254)
-Organization	RBGE
+PhysicalSpecimenID	O-F-2201154
+PhysicalSpecimenID	30eff5c2-97b4-4eeb-bb46-8c12a1cf0f37
 Organization	https://www.gbif.org/grscicoll/institution/0237598a-853a-492c-af74-a723fe251799
-Organization	MNHN
-Organization	 https://www.gbif.org/grscicoll/institution/fe534fe7-dccd-4d79-8313-c11b2ea854ab
 Organization	BZ
-Organization	https://www.gbif.org/grscicoll/institution/6a6ac6c5-1b8a-48db-91a2-f8661274ff80
+Organization	http://www.wikidata.org/entity/Q604444
 Name	Colias croceus (Geoffroy, 1785)
 Name	Ophthalmosaurus
 Name	Australian Baobab
@@ -28,7 +26,6 @@ ObjectType	Sperm sample
 ObjectType	Blown eggshell
 ObjectType	Mounted
 ObjectType	Study skin
-License	CC0
 License	CC0 1.0 Universal
 License	https://creativecommons.org/publicdomain/zero/1.0/
 License	CC BY
@@ -65,6 +62,7 @@ ScientificNameID	mindat:1:1:1375:4
 ScientificNameID	https://mindat.org/4ca61d6f-4208-8fb2-3b0eecbcs8f0
 ScientificNameID	urn:lsid:marinespecies.org:taxname:347049
 ScientificNameID	urn:lsid:zoobank.org:act:021CD126-41BA-45BF-AB74-B04B7ED01422
+GeographicalLocalityID	
 IdentifiedByID	https://www.wikidata.org/wiki/Q94522
 IdentifiedByID	https://orcid.org/0000-0001-7698-3945
 IdentifiedByID	https://www.wikidata.org/wiki/Q276405

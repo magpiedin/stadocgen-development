@@ -31,4 +31,4 @@ The MIDS level aimed at within a digitisation programme will depend on many fact
 
 It is important to keep in mind that MIDS defines the “Minimum” information at each level and it is strongly encouraged to capture more information if possible.
 
-*Last Updated: 8 May 2025*
+*Last Updated: 6 February 2025*

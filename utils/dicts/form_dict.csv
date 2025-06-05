@@ -1,0 +1,28 @@
+﻿field_term,field_label_en
+author,Author
+authorID,Author ID
+className,Belongs to Class
+class,Class
+datatype,Datatype
+definition,Definition
+description,Description
+elementName,Element Name
+elementIRI,Element URI
+examples,Examples
+justification,Justification 
+label,Label
+level,Level
+mappingProperty,Mapping Property
+modified,Modified
+objectCategory,Object Category
+objectIRI,Object IRI
+objectType,Object Type
+purpose,Purpose
+rdfType,RDF Type
+isRepeatable,Repeatable
+isRequired,Required
+isRequiredBy,Required By
+termIRI,Term IRI
+term,Term Name
+termVersionIRI,Term Version IRI
+usageNotes,Usage Notes
