@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-bg-color" id="main-nav">
+	<div class="container">
+	    <a class="navbar-brand d-flex align-items-center" href="{{ landingPage }}">
+	        <img class="me-3" src="https://tdwg.github.io/chrono/assets/theme/images/tdwg-logo-short.svg" alt="{{  title }}">
+            {{ title }}
+	    </a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+			Menu <i class="fas fa-bars"></i>
+		</button>
+		<div class="collapse navbar-collapse" id="navbar-menu">
+			<ul class="navbar-nav ms-auto">
+				<li class="navbar-item">
+					<a class="nav-link {{ 'nav-link-active' if slug == 'home' }}"
+                       href="{{ url_for('home') }}">Home</a>
+				</li>
+                <li class="navbar-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle {{ 'nav-link-active' if slug == 'term-list' }}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Terms
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('terms') }}">English (en)</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('terms') }}/fr/">Français (fr)</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+				<li class="navbar-item">
+					<a class="nav-link {{ 'nav-link-active' if slug == 'quick-reference' }}"
+					href="{{ url_for('quickReference') }}">Guide</a>
+				</li>
+				<li class="navbar-item">
+					<a class="nav-link {{ 'nav-link-active' if slug == 'resources' }}"
+					href="{{ url_for('docResources') }}">Resources</a>
+				</li>
+				<li class="navbar-item">
+					<a class="nav-link" href="{{ githubRepo }}">GitHub</a>
+				</li>
+            </ul>
+		</div>
+	</div>
+</nav>

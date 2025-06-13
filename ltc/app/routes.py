@@ -44,37 +44,14 @@ def home():
                            )
 
 # Terms page with language parameter
-@app.route('/terms/', defaults={'lang': None})
-@app.route('/terms/<lang>/', methods=['GET'])
-def terms(lang = None):
+@app.route('/terms/')
+def terms():
 
-    # Read translations YAML file
-    translations_yml = 'app/utils/translations.yml'
-    yml_dict = []
-    for yf in glob.glob(translations_yml, recursive=True):
-        with open(yf, 'r', encoding='utf8') as f:
-            lang_meta = yaml.load(f, Loader=yaml.FullLoader)
-            yml_dict.append(lang_meta)
-
-
-    # Load Translated Markdown Content
-    if lang:
-        print(lang)
-        for item in lang_meta['Languages']:
-            if item['code'] == lang:
-                language_code = item['code']
-                language_label = item['label']
-                header_mdfile = 'app/md/termlist-header-'+lang+'.md'
-                with open(header_mdfile, encoding="utf-8") as f:
-                    marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
-            else:
-                abort(404)
-    else:
-        language_code = 'en'
-        language_label = ''
-        header_mdfile = 'app/md/termlist-header.md'
-        with open(header_mdfile, encoding="utf-8") as f:
-            marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+    language_code = 'en'
+    language_label = ''
+    header_mdfile = 'app/md/termlist-header.md'
+    with open(header_mdfile, encoding="utf-8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
 
 
@@ -125,6 +102,66 @@ def terms(lang = None):
                            languageLabel=language_label
                            )
 
+
+# Terms page in French
+@app.route('/terms/fr/')
+def termsFr():
+
+    header_mdfile = 'app/md/termlist-header-fr.md'
+    with open(header_mdfile, encoding="utf-8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    # Terms
+    terms_csv = 'app/data/output/ltc-translations-termlist.csv'
+
+    # terms_csv = 'app/data/output/ltc-fr-termlist.csv'
+    terms_df = pd.read_csv(terms_csv, encoding='utf-8')
+
+    sssom_csv = 'app/data/output/ltc-sssom.csv'
+    sssom_df = pd.read_csv(sssom_csv, encoding='utf-8')
+
+    # Merge SSSOM Mappings with Terms
+    terms_skos_df = pd.merge(
+        terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label',
+                            'mapping_justification']],
+        on=['compound_name'], how='left'
+    )
+
+    terms = terms_skos_df.sort_values(by=['class_name', 'term_local_name'])
+
+    # Unique Class Names
+    ltcCls = terms_df['class_name'].dropna().unique()
+
+    # Terms by Class
+    grpdict2 = terms_df.groupby('class_name')[
+        ['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'term_version_iri', 'term_modified']].apply(
+        lambda g: list(map(tuple, g.values.tolist()))).to_dict()
+    termsByClass = []
+
+    for i in grpdict2:
+        termsByClass.append({
+            'class': i,
+            'termlist': grpdict2[i]
+        })
+    print(terms.columns.to_list())
+    return render_template('term-list.html',
+                           headerMarkdown=Markup(marked_text),
+                           ltcCls=ltcCls,
+                           terms=terms,
+                           sssom=sssom_df,
+                           termsByClass=termsByClass,
+                           uniqueTerms=terms,
+                           pageTitle='Term List',
+                           title=meta['title'],
+                           acronym=meta['acronym'],
+                           landingPage=meta['documentation-landing-page'],
+                           githubRepo=meta['github-repo'],
+                           slug='term-list',
+                           languageCode='fr',
+                           languageLabel='Français'
+                           )
+
+
 # Quick Reference Guide with Language Parameter
 @app.route('/quick-reference/', defaults={'lang': None})
 @app.route('/quick-reference/<lang>/', methods=['GET'])
@@ -165,6 +202,7 @@ def quickReference(lang = None):
 
 
     # Quick Reference Main
+    #df = pd.read_csv('app/data/output/ltc-translations-termlist.csv', encoding='utf-8')
     df = pd.read_csv('app/data/output/ltc-termlist.csv', encoding='utf-8')
     df['examples'] = df['examples'].str.replace(r'"', '')
     df['definition'] = df['definition'].str.replace(r'"', '')
