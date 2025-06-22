@@ -68,7 +68,10 @@ def terms():
     termsCls = terms_df['class_name'].dropna().unique()
 
     # Terms by Class
-    grpdict2 = terms_df.groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name']].apply(
+#    grpdict2 = terms_df.sort_values(['class_name','term_local_name'],ascending=False).groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'rdf_type']].apply(
+#        lambda g: list(map(tuple, g.values.tolist()))).to_dict()
+
+    grpdict2 = terms_df.fillna(-1).groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'rdf_type']].apply(
         lambda g: list(map(tuple, g.values.tolist()))).to_dict()
     termsByClass = []
 

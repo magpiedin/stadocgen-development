@@ -456,9 +456,6 @@ table.table-sssom tbody [data-bs-toggle="collapse"].collapsed .indicator-td .fa:
 	font-weight: 400;
 	padding-left: 10px;
 }
-
-
-
 table.table-sssom thead tr th {
 	padding: 0;
 	text-align: left;
@@ -521,7 +518,11 @@ table.nested-table tbody tr td {
 table.nested-table tbody tr td:first-of-type {
 	padding: 0 0.5rem;
 }
+/* Requirements Tables -------------------------------- */
 
+.table-header.mt-20 {
+	margin-top: 20px;
+}
 
 
 /* Footer --------------------------------------------- */

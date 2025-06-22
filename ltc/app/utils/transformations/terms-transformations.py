@@ -57,7 +57,6 @@ ns_df['namespace'] = ns_df['namespace'].astype(str) + ':'
 if 'ltc:' not in ns_df.values:
     ltc_row = {"namespace": "ltc:", "namespace_iri": "http://rs.tdwg.org/ltc/terms/"}
     ns_df = pd.concat([ns_df, pd.DataFrame([ltc_row])], ignore_index=True)
-
 ns_df.to_csv(ns_csv, index=False, encoding='utf8')
 
 # Merge Terms and Namespaces

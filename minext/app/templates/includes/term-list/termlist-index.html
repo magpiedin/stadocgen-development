@@ -13,8 +13,10 @@
             <h5>{{ v.class }}</h5>
             <ul class="term-list list-2-col">
                 {% for k in v.termlist %}
+                    {% if v['class'] != k[1] %}
                     <li><a href="#{{ v.class }}_{{ k[1] }}">{{ k[0] }}</a></li>
-                {%  endfor %}
+                    {% endif %}
+                {% endfor %}
             </ul>
          </div>
 {%  endfor %}

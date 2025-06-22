@@ -12,7 +12,7 @@ freezer = Freezer(app)
 #app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['FREEZER_DESTINATION'] = 'build'
 app.config['FREEZER_RELATIVE_URLS'] = True
-#app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
+app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
 
 with open('meta.yml') as metadata:
     meta = yaml.safe_load(metadata)
@@ -58,6 +58,10 @@ def terms():
     with open(header_mdfile, encoding="utf-8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
+    # Metadata Terms
+    meta_csv = 'data/output/metadata-terms.csv'
+    meta_df = pd.read_csv(meta_csv, encoding='utf-8')
+
     # Terms
     terms_csv = 'data/output/minext-termlist.csv'
     terms_df = pd.read_csv(terms_csv, encoding='utf-8')
@@ -68,7 +72,7 @@ def terms():
     termsCls = terms_df['class_name'].dropna().unique()
 
     # Terms by Class
-    grpdict2 = terms_df.groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name']].apply(
+    grpdict2 = terms_df.fillna(-1).groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name']].apply(
         lambda g: list(map(tuple, g.values.tolist()))).to_dict()
     termsByClass = []
 
@@ -79,6 +83,7 @@ def terms():
         })
     return render_template('term-list.html',
                            headerMarkdown=Markup(marked_text),
+                           metadataTerms=meta_df,
                            termsCls=termsCls,
                            terms=terms,
                            termsByClass=termsByClass,
@@ -91,8 +96,62 @@ def terms():
                            githubRepo=meta['github-repo'],
                            slug='terms',
                            languageCode=language_code,
-                           languageLabel=language_label
+                           languageLabel=language_label,
                            )
+
+@app.route('/quick-reference/')
+def quickReference():
+    header_mdfile = 'md/quick-reference-header.md'
+    with open(header_mdfile, encoding="utf8") as f:
+        marked_text = markdown2.markdown(f.read())
+
+    req_mdfile = 'md/requirements-header.md'
+    with open(req_mdfile, encoding="utf8") as rf:
+        req_marked_text = markdown2.markdown(rf.read())
+
+    # Quick Reference Main
+    df = pd.read_csv('data/output/minext-termlist.csv', encoding='utf8')
+
+    # Group by Class
+    grpdict = df.fillna(-1).groupby('class_name')[['namespace','term_local_name','label','definition',
+                                                   'term_scope','examples','usage_note','rdf_type','notes',
+                                                   'datatype','is_required','compound_name','namespace_iri',
+                                                   'term_iri','term_ns_name','term_modified']].apply(
+        lambda g: list(map(tuple, g.values.tolist()))).to_dict()
+    grplists = []
+    for i in grpdict:
+        grplists.append({
+            'class': i,
+            'termlist': grpdict[i]
+        })
+
+    # Required values
+    terms_df = df[['namespace', 'term_local_name',
+                   'label', 'class_name',
+                   'is_required', 'rdf_type',
+                   'compound_name']].sort_values(by=['class_name'])
+
+    required_df = terms_df.loc[(terms_df['is_required'] == True) &
+                               (terms_df['rdf_type'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property')]
+
+    required_classes_df = terms_df.loc[(terms_df['is_required'] == True) &
+                           (terms_df['rdf_type'] == 'http://www.w3.org/2000/01/rdf-schema#Class')]
+
+
+    return render_template('quick-reference.html',
+                           headerMarkdown=Markup(marked_text),
+                           requirementsMarkdown=Markup(req_marked_text),
+                           grplists=grplists,
+                           requiredTerms=required_df,
+                           requiredClasses=required_classes_df,
+                           pageTitle='Quick Reference Guide',
+                           title=meta['title'],
+                           acronym=meta['acronym'],
+                           landingPage=meta['documentation-landing-page'],
+                           githubRepo=meta['github-repo'],
+                           slug='quick-reference',
+                           status=meta['status']
+    )
 
 
 if __name__ == "__main__":

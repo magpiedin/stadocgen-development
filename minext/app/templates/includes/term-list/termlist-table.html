@@ -10,7 +10,7 @@
                                 {% if v['class_name'] == v['term_local_name'] %}
                                     <span id="{{ v['class_name'] }}">{{ v['term_ns_name'] }}</span>
                                 {% else %}
-                                    <span id="{{ v['class_name'] }}_{{ v['term_local_name'] }}">{{ v['term_ns_name'] }}</span>
+                                    <span id="{{ v['class_name'] }}_{{ v['term_local_name'] }}"><strong>{{ v['term_ns_name'] }}</strong></span>
                                 {% endif %}
                             </span>
                         </th>
@@ -93,15 +93,17 @@
                     {%  endif %}
 
                     {%  if( v['is_required'] ) %}
+                        {% if( v['rdf_type'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property') %}
                         <tr>
                             <th scope="row">Required</th>
                             <td>{{ v['is_required'] }}</td>
                         </tr>
+                            {% endif %}
                     {%  endif %}
 
                     <tr>
                         <th scope="row">RDF Type</th>
-                        {%  if(v['rdf_type'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property')  %}
+                        {%  if(v['rdf_type'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property') %}
                             <td class="property"><a href="{{ v['rdf_type'] }}">rdf:Property</a></td>
                         {%  else %}
                             <td class="class"><a href="{{ v['rdf_type'] }}">rdfs:Class</a></td>

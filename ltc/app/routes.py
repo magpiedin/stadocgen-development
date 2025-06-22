@@ -107,7 +107,7 @@ def terms(lang = None):
             'class': i,
             'termlist': grpdict2[i]
         })
-    print(terms.columns.to_list())
+
     return render_template('term-list.html',
                            headerMarkdown=Markup(marked_text),
                            ltcCls=ltcCls,
