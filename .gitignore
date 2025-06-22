@@ -248,3 +248,4 @@ app/test.py
 .idea/stadocgen.iml
 /.idea
 /app/utils/analysis/output
+/.idea
