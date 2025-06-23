@@ -5,6 +5,7 @@ import globals
 import glob
 import yaml
 from datetime import date
+import numpy as np
 
 today = date.today()
 formatted_date = today.strftime("%Y-%m-%d")
@@ -65,6 +66,9 @@ minext_df['examples'] = minext_df['examples'].str.replace('"', '')
 minext_df['definition'] = minext_df['definition'].str.replace('"', '')
 minext_df['usage_note'] = minext_df['usage_note'].str.replace('"', '')
 minext_df['notes'] = minext_df['notes'].str.replace('"', '')
+minext_df['is_required'] = minext_df['is_required'].replace('',np.nan).fillna('False')
+minext_df['usage_note'] = minext_df['usage_note'].replace('',np.nan).fillna('')
+
 
 # Resave terms file
 minext_df.to_csv(term_csv, index=False, encoding='utf8')

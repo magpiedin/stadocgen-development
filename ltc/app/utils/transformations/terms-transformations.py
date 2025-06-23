@@ -78,7 +78,6 @@ ltc_df['definition'] = ltc_df['definition'].str.replace('"', '')
 ltc_df['usage'] = ltc_df['usage'].str.replace('"', '')
 ltc_df['notes'] = ltc_df['notes'].str.replace('"', '')
 
-
 # Resave terms file
 ltc_df.to_csv(term_csv, index=False, encoding='utf8')
 

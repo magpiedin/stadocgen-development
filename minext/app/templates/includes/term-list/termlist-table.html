@@ -42,17 +42,22 @@
                         <th scope="row">Definition</th>
                         <td>{{ v['definition'] }}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">Scope</th>
-                        <td>{{ v['term_scope'] }}</td>
-                    </tr>
 
-                    {% if v['usage'] is number %}
-                    {% else %}
+                    {% if(v['rdf_type'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property') %}
                         <tr>
-                            <th scope="row">Usage Note</th>
-                            <td>{{ v['usage_note'] }}</td>
+                            <th scope="row">Scope</th>
+                            <td>{{ v['term_scope'] }}</td>
                         </tr>
+                    {% endif %}
+
+                    {% if(v['rdf_type'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property') %}
+                       {% if v['usage_note'] is number %}
+                           {%  else %}
+                            <tr>
+                                <th scope="row">Usage Note</th>
+                                <td>{{ v['usage_note'] }}</td>
+                            </tr>
+                        {% endif %}
                     {% endif %}
 
                     {% if v['notes'] is number %}
