@@ -36,13 +36,15 @@ shutil.copy(examples_source, examples_target)
 
 # -------------------------------------------------------
 # Process
-# source_df > target_df
+# ltc_df > target_df
 # Read
 df = pd.read_csv(target_file, encoding="utf8",sep='\t')
 
 # Renamez
 df.rename(columns={'MIDSLevel_localName': 'class_name',
                     'informationElement_localName': 'term_local_name',
+                    'usage': 'purpose',
+                    'recommendations': 'usage',
                     'term_added': 'term_created'
                    }, inplace=True)
 

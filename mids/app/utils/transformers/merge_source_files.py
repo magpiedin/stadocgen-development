@@ -20,8 +20,7 @@ termsFile = str(projectPath) + '/app/data/output/master-list.tsv'
 
 # Create empty template if file doesn't exist
 if not os.path.isdir(termsFile):
-    fields = ['namespace','term_local_name','label','definition','usage','rdf_type','term_created','term_modified',
-              'compound_name','namespace_iri','term_iri','term_ns_name','term_version_iri','purpose','alt_label','level']
+    fields = ['namespace','term_local_name','label','definition','usage','notes','examples','rdf_type','term_created','term_modified','compound_name','namespace_iri','term_iri','term_ns_name','term_version_iri','datatype','purpose','alt_label','level']
     with open(termsFile, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames = fields, delimiter='\t')
         writer.writeheader()
@@ -35,7 +34,7 @@ mergeFrames = [df_levels, df_infoElements]
 df_terms = pd.concat([df_terms,df_levels])
 df_final = pd.concat([df_terms,df_infoElements])
 
-df_final['term_uri'] = 'https://mids.tdwg.org/information-elements/index.html#' + df_final['term_local_name']
+df_final['term_uri'] = 'https://ltc.tdwg.org/information-elements/index.html#' + df_final['term_local_name']
 
 ## Save
 df_final.to_csv(termsFile, index=False, encoding='utf8',sep='\t')

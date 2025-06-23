@@ -33,7 +33,7 @@ shutil.copy(sourceFile, targetFile)
 
 # -------------------------------------------------------
 # Process
-# source_df > target_df
+# ltc_df > target_df
 # Read
 df = pd.read_csv(targetFile, encoding="utf8",sep='\t')
 
@@ -47,8 +47,7 @@ df['rdf_type'] = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Class'
 df['term_ns_name'] = 'mids:' + df['term_local_name']
 df['namespace'] = 'mids:'
 
-df.rename(columns={'notes': 'usage',
-                   'pref_label': 'label'
+df.rename(columns={'notes': 'usage'
                    }, inplace=True)
 
 # Resave timestamped
