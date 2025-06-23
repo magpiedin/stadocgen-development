@@ -28,7 +28,10 @@
 
                     <tr>
                         <th scope="row">Term Version IRI</th>
-                        <td>{{ v['term_version_iri']|urlize }}</td>
+                          <td>
+                              <em>Pending</em>
+                              <!-- {{ v['term_version_iri']|urlize }} -->
+                          </td>
                     </tr>
 
                     <tr>
@@ -39,12 +42,16 @@
                         <th scope="row">Definition</th>
                         <td>{{ v['definition'] }}</td>
                     </tr>
+                    <tr>
+                        <th scope="row">Scope</th>
+                        <td>{{ v['term_scope'] }}</td>
+                    </tr>
 
                     {% if v['usage'] is number %}
                     {% else %}
                         <tr>
-                            <th scope="row">Usage</th>
-                            <td>{{ v['usage'] }}</td>
+                            <th scope="row">Usage Note</th>
+                            <td>{{ v['usage_note'] }}</td>
                         </tr>
                     {% endif %}
 
