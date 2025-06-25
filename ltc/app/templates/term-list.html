@@ -18,6 +18,10 @@
 			    <h1 id="ltc-list-of-terms">{{ title }} ({{ languageLabel|safe }})</h1>
 				<div class="content-header-wrapper">
 	                {{ headerMarkdown }}
+                    {% if translationDisclaimer %}
+                    <h2 id="4-translation-disclaimer">4. Translations</h2>
+                    {{ translationDisclaimer }}
+                    {% endif %}
 				</div>
                 {% if languageCode is not none %}
                     {% if languageCode == 'en' %}

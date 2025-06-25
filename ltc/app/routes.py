@@ -33,6 +33,10 @@ def home():
     home_mdfile = 'app/md/home-content.md'
     with open(home_mdfile, encoding="utf-8") as f:
         marked_text = markdown2.markdown(f.read())
+    disclaimer_mdfile = 'app/md/translation-disclaimer.md'
+    with open(disclaimer_mdfile, encoding="utf-8") as f:
+        marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
     return render_template('home.html',
                            home_markdown=Markup(marked_text),
                            pageTitle='Home',
@@ -40,7 +44,8 @@ def home():
                            acronym=meta['acronym'],
                            landingPage=meta['documentation-landing-page'],
                            githubRepo=meta['github-repo'],
-                           slug='home'
+                           slug='home',
+                           translationDisclaimer=Markup(marked_disclaimer)
                            )
 
 # Terms page with language parameter
@@ -76,8 +81,9 @@ def terms(lang = None):
         with open(header_mdfile, encoding="utf-8") as f:
             marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-
-
+    disclaimer_mdfile = 'app/md/translation-disclaimer.md'
+    with open(disclaimer_mdfile, encoding="utf-8") as f:
+        marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
     # Terms
     terms_csv = 'app/data/output/ltc-translations-termlist.csv'
     #terms_csv = 'app/data/output/ltc-fr-termlist.csv'
@@ -122,7 +128,8 @@ def terms(lang = None):
                            githubRepo=meta['github-repo'],
                            slug='term-list',
                            languageCode=language_code,
-                           languageLabel=language_label
+                           languageLabel=language_label,
+                           translationDisclaimer=Markup(marked_disclaimer)
                            )
 
 # Quick Reference Guide with Language Parameter

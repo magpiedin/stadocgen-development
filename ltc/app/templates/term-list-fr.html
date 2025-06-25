@@ -11,13 +11,11 @@
 			<div class="col-lg-9 order-lg-first mx-auto">
                 <h1 id="ltc-list-of-terms">{{ pageTitle }}<span>(Français)</span></h1>
 				<div class="content-header-wrapper">
-                    {%  if translationDisclaimer %}
-                    <div class="callout callout-primary">
-                        {{  translationDisclaimer }}
-                    </div>
-                     {%  endif %}
-                    {{ translationDisclaimer }}
 	                {{ headerMarkdown }}
+                    {% if translationDisclaimer %}
+                    <h2 id="4-translation-disclaimer">4. Translations</h2>
+                    {{ translationDisclaimer }}
+                    {% endif %}
 				</div>
 				{% include 'fr/includes/term-list/termlist-index-fr.html' %}
 				{% include 'fr/includes/term-list/termlist-table-fr.html' %}
