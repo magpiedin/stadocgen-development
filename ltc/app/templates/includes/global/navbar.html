@@ -10,8 +10,15 @@
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="navbar-nav ms-auto">
 				<li class="navbar-item">
-					<a class="nav-link {{ 'nav-link-active' if slug == 'home' }}"
-                       href="{{ url_for('home') }}">Home</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle {{ 'nav-link-active' if slug == 'home' }}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Home
+                        </a>
+                       <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('home') }}">English (en)</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('home_fr') }}">Français (fr)</a></li>
+                        </ul>
+                    </div>
 				</li>
                 <li class="navbar-item">
                     <div class="dropdown">
@@ -20,7 +27,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ url_for('terms') }}">English (en)</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('terms') }}/fr/">Français (fr)</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('terms_fr') }}">Français (fr)</a></li>
                         </ul>
                     </div>
                 </li>

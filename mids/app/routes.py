@@ -124,24 +124,28 @@ def mappings():
                            mappings=mappings_df,
                            )
 
-@app.route('/tools')
-def tools():
-    content_mdfile = str(relpath) + 'md/tools-content.md'
+@app.route('/resources')
+def resources():
+    content_mdfile = str(relpath) + 'md/resources-content.md'
     with open(content_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     with open(str(relpath) + 'md/tools.yml') as tools_yml:
         tools_meta = yaml.safe_load(tools_yml)
 
-    return render_template('tools.html',
-        content_markdown=Markup(marked_text),
-        tools_metadata=tools_meta,
-        pageTitle='Tools',
-        title=meta['title'],
-        acronym=meta['acronym'],
-        landingPage=meta['links']['landing_page'],
-        githubRepo=meta['links']['github_repository'],
-        slug='tools')
+    with open(str(relpath) + 'md/glossary.yml') as glossary_yml:
+        glossary_meta = yaml.safe_load(glossary_yml)
+
+    return render_template('resources.html',
+                           content_markdown=Markup(marked_text),
+                           tools_metadata=tools_meta,
+                           glossary_metadata=glossary_meta,
+                           pageTitle='Resources',
+                           title=meta['title'],
+                           acronym=meta['acronym'],
+                           landingPage=meta['links']['landing_page'],
+                           githubRepo=meta['links']['github_repository'],
+                           slug='resources')
 
 @app.route('/about')
 def about():

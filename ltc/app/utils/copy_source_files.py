@@ -35,12 +35,13 @@ def copy_md_files():
 	download_urls = [
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/fr/home-content-fr.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/fr/termlist-header-fr.md",
+		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/fr/translation-disclaimer-fr.md"
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/home-content.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/quick-reference-header.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/resources-header.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/sssom-reference.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/termlist-header.md",
-		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/translation-disclaimer.md"
+		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/translation-disclaimer.md",
 	]
 
 	target_dir = str(root_dir) + '/ltc/app/md'

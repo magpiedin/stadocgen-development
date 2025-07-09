@@ -148,3 +148,38 @@ def quickReference():
                            githubRepo=meta['github-repo'],
                            slug='quick-reference'
     )
+
+
+@app.route('/term-scopes')
+def termsByScope():
+    header_mdfile = 'app/md/scopes-header.md'
+    marked_text = ''
+    with open(header_mdfile, encoding="utf-8") as f:
+        marked_text = markdown2.markdown(f.read())
+
+    # Quick Reference Main
+    terms_csv = 'app/data/output/minext-termlist.csv'
+    terms_df = pd.read_csv(terms_csv, encoding='utf-8')
+    terms = terms_df.sort_values(by=['class_name', 'term_local_name'])
+    grpdict2 = terms_df.fillna(-1).groupby('class_name')[
+        ['term_ns_name', 'term_local_name', 'namespace', 'compound_name', 'rdf_type']].apply(
+        lambda g: list(map(tuple, g.values.tolist()))).to_dict()
+    termsByClass = []
+
+    for i in grpdict2:
+        termsByClass.append({
+            'class': i,
+            'termlist': grpdict2[i]
+        })
+
+    return render_template('term-scopes.html',
+                           headerMarkdown=Markup(marked_text),
+                           terms=terms,
+                           pageTitle='Terms by Scope',
+                           status=meta['status'],
+                           title=meta['title'],
+                           acronym=meta['acronym'],
+                           landingPage=meta['documentation-landing-page'],
+                           githubRepo=meta['github-repo'],
+                           slug='term-scopes',
+    )

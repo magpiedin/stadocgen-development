@@ -36,6 +36,10 @@ def home():
     home_mdfile = 'md/home-content.md'
     with open(home_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read())
+    disclaimer_mdfile = 'md/translation-disclaimer.md'
+    with open(disclaimer_mdfile, encoding="utf-8") as f:
+        marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
     return render_template('home.html',
                            home_markdown=Markup(marked_text),
                            pageTitle='Home',
@@ -43,15 +47,12 @@ def home():
                            acronym=meta['acronym'],
                            landingPage=meta['documentation-landing-page'],
                            githubRepo=meta['github-repo'],
-                           slug='home'
+                           slug='home',
+                           translationDisclaimer = Markup(marked_disclaimer)
                            )
-
-# Write French Translation of Terms Page
-@app.route('/terms/', defaults={'lang': None})
-@app.route('/terms/<lang>')
-def terms(lang = None):
-
-    # Read translations YAML file
+#French translated Homepage
+@app.route('/fr/')
+def home_fr():
     translations_yml = 'utils/translations.yml'
     yml_dict = []
     for yf in glob.glob(translations_yml, recursive=True):
@@ -59,26 +60,57 @@ def terms(lang = None):
             lang_meta = yaml.load(f, Loader=yaml.FullLoader)
             yml_dict.append(lang_meta)
 
+    lang = 'fr'
+    language_code = 'fr'
+    language_label = 'Français'
 
-    # Load Translated Markdown Content
-    if lang:
-        for item in lang_meta['Languages']:
-            if item['code'] == lang:
-                language_code = item['code']
-                language_label = item['label']
-                header_mdfile = 'md/termlist-header-'+lang+'.md'
-                with open(header_mdfile, encoding="utf-8") as f:
-                    marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
-            else:
-                abort(404)
-    else:
-        language_code = 'en'
-        language_label = ''
-        header_mdfile = 'md/termlist-header.md'
-        with open(header_mdfile, encoding="utf-8") as f:
-            marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+    home_mdfile = 'md/'+lang+'/home-content-'+lang+'.md'
+    with open(home_mdfile, encoding="utf8") as f:
+        marked_text = markdown2.markdown(f.read())
+
+    disclaimer_mdfile = 'md/'+lang+'/translation-disclaimer-'+lang+'.md'
+    with open(disclaimer_mdfile, encoding="utf-8") as f:
+        marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    return render_template('home.html',
+                           home_markdown=Markup(marked_text),
+                           pageTitle='Home',
+                           title=meta['title'],
+                           acronym=meta['acronym'],
+                           landingPage=meta['documentation-landing-page'],
+                           githubRepo=meta['github-repo'],
+                           slug='home',
+                           translationDisclaimer = Markup(marked_disclaimer)
+                           )
 
 
+
+# French Terms Page
+@app.route('/terms/fr/')
+def terms_fr():
+
+    translations_yml = 'utils/translations.yml'
+    yml_dict = []
+    for yf in glob.glob(translations_yml, recursive=True):
+        with open(yf, 'r', encoding='utf8') as f:
+            lang_meta = yaml.load(f, Loader=yaml.FullLoader)
+            yml_dict.append(lang_meta)
+
+    lang = 'fr'
+    language_code = 'fr'
+    language_label = 'Français'
+
+    header_mdfile = 'md/'+lang+'/termlist-header-'+lang+'.md'
+    with open(header_mdfile, encoding="utf-8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    disclaimer_mdfile = 'md/'+lang+'/translation-disclaimer-'+lang+'.md'
+    with open(disclaimer_mdfile, encoding="utf-8") as f:
+        marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    disclaimer_header_mdfile = 'md/' + lang + '/translation-disclaimer-header-' + lang + '.md'
+    with open(disclaimer_header_mdfile, encoding="utf-8") as f:
+        marked_disclaimer_header = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     # Terms
     terms_csv = 'data/output/ltc-termlist.csv'
@@ -123,7 +155,75 @@ def terms(lang = None):
                            githubRepo=meta['github-repo'],
                            slug='term-list',
                            languageCode=language_code,
-                           languageLabel=language_label
+                           languageLabel=language_label,
+                           translationDisclaimer=Markup(marked_disclaimer),
+                           translationDisclaimerHeader=Markup(marked_disclaimer_header)
+                           )
+# Terms Page (English)
+@app.route('/terms/')
+def terms():
+
+    # Read translations YAML file
+    language_code = 'en'
+    language_label = ''
+    header_mdfile = 'md/termlist-header.md'
+    with open(header_mdfile, encoding="utf-8") as f:
+        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    disclaimer_header_mdfile = 'md/translation-disclaimer-header.md'
+    with open(disclaimer_header_mdfile, encoding="utf-8") as f:
+        marked_disclaimer_header = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    disclaimer_mdfile = 'md/translation-disclaimer.md'
+    with open(disclaimer_mdfile, encoding="utf-8") as f:
+        marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    # Terms
+    terms_csv = 'data/output/ltc-termlist.csv'
+    terms_df = pd.read_csv(terms_csv, encoding='utf-8')
+
+    sssom_csv = 'data/output/ltc-sssom.csv'
+    sssom_df = pd.read_csv(sssom_csv, encoding='utf-8')
+
+    # Merge SSSOM Mappings with Terms
+    terms_skos_df = pd.merge(
+        terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label', 'mapping_justification' ]],
+        on=['compound_name'], how='left'
+    )
+
+    terms = terms_skos_df.sort_values(by=['class_name','term_local_name'])
+
+    # Unique Class Names
+    ltcCls = terms_df['class_name'].dropna().unique()
+
+    # Terms by Class
+    grpdict2 = terms_df.groupby('class_name')[['term_ns_name', 'term_local_name', 'namespace', 'compound_name','term_version_iri','term_modified']].apply(
+        lambda g: list(map(tuple, g.values.tolist()))).to_dict()
+    termsByClass = []
+
+    for i in grpdict2:
+        termsByClass.append({
+            'class': i,
+            'termlist': grpdict2[i]
+        })
+
+    return render_template('term-list.html',
+                           headerMarkdown=Markup(marked_text),
+                           ltcCls=ltcCls,
+                           terms=terms,
+                           sssom=sssom_df,
+                           termsByClass=termsByClass,
+                           uniqueTerms=terms,
+                           pageTitle='Term List',
+                           title=meta['title'],
+                           acronym=meta['acronym'],
+                           landingPage=meta['documentation-landing-page'],
+                           githubRepo=meta['github-repo'],
+                           slug='term-list',
+                           languageCode=language_code,
+                           languageLabel=language_label,
+                           translationDisclaimer=Markup(marked_disclaimer),
+                           translationDisclaimerHeader=Markup(marked_disclaimer_header)
                            )
 
 @app.route('/quick-reference/')

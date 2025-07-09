@@ -34,7 +34,7 @@ mergeFrames = [df_levels, df_infoElements]
 df_terms = pd.concat([df_terms,df_levels])
 df_final = pd.concat([df_terms,df_infoElements])
 
-df_final['term_uri'] = 'https://ltc.tdwg.org/information-elements/index.html#' + df_final['term_local_name']
+df_final['term_uri'] = 'https://mids.tdwg.org/information-elements/index.html#' + df_final['term_local_name']
 
 ## Save
 df_final.to_csv(termsFile, index=False, encoding='utf8',sep='\t')

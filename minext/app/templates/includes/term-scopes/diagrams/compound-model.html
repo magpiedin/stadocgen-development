@@ -1,0 +1,12 @@
+<pre class="mermaid" id="core-er-diagram">
+---
+config:
+  theme: redux
+---
+erDiagram
+    a["COMPOUND SPECIMEN"]
+    b["CONSTITUENT PART (MINERAL)"]
+    c["CONSTITUENT PART NAME"]
+    a o|..|{ b : "composed of"
+    b ||--|{ c : "identified by"
+</pre>
