@@ -36,6 +36,11 @@ def home():
     home_mdfile = 'md/home-content.md'
     with open(home_mdfile, encoding="utf8") as f:
         marked_text = markdown2.markdown(f.read())
+
+    disclaimer_header_mdfile = 'md/translation-disclaimer-header.md'
+    with open(disclaimer_header_mdfile, encoding="utf-8") as f:
+        marked_disclaimer_header = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
     disclaimer_mdfile = 'md/translation-disclaimer.md'
     with open(disclaimer_mdfile, encoding="utf-8") as f:
         marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
@@ -48,7 +53,7 @@ def home():
                            landingPage=meta['documentation-landing-page'],
                            githubRepo=meta['github-repo'],
                            slug='home',
-                           translationDisclaimer = Markup(marked_disclaimer)
+                           translationDisclaimer=Markup(marked_disclaimer),
                            )
 #French translated Homepage
 @app.route('/fr/')
@@ -72,7 +77,7 @@ def home_fr():
     with open(disclaimer_mdfile, encoding="utf-8") as f:
         marked_disclaimer = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
-    return render_template('home.html',
+    return render_template('fr/home-fr.html',
                            home_markdown=Markup(marked_text),
                            pageTitle='Home',
                            title=meta['title'],
@@ -82,8 +87,6 @@ def home_fr():
                            slug='home',
                            translationDisclaimer = Markup(marked_disclaimer)
                            )
-
-
 
 # French Terms Page
 @app.route('/terms/fr/')
@@ -113,7 +116,7 @@ def terms_fr():
         marked_disclaimer_header = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
 
     # Terms
-    terms_csv = 'data/output/ltc-termlist.csv'
+    terms_csv = 'data/output/ltc-translations-termlist.csv'
     terms_df = pd.read_csv(terms_csv, encoding='utf-8')
 
     sssom_csv = 'data/output/ltc-sssom.csv'
@@ -121,7 +124,8 @@ def terms_fr():
 
     # Merge SSSOM Mappings with Terms
     terms_skos_df = pd.merge(
-        terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label', 'mapping_justification' ]],
+        terms_df, sssom_df[['compound_name', 'predicate_label', 'object_id', 'object_category', 'object_label',
+                            'mapping_justification' ]],
         on=['compound_name'], how='left'
     )
 

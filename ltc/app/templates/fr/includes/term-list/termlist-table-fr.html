@@ -29,15 +29,30 @@
                             <th scope="row">Version de l'IRI du terme</th>
                             <td>{{ v['term_version_iri']|urlize }}</td>
                         </tr>
-						<tr>
-							<th scope="row">Label</th>
-							<td>{{ v['label_fr'] }}</td>
-						</tr>
-						<tr>
-							<th scope="row">Définition</th>
-							<td>{{ v['definition_fr'] }}</td>
-						</tr>
 
+                        {% if v['label_fr'] is number %}
+                            <tr>
+                                <th scope="row">Label</th>
+                                <td>{{ v['label'] }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th scope="row">Label</th>
+                                <td>{{ v['label_fr'] }}</td>
+                            </tr>
+                        {% endif %}
+
+                        {% if v['definition_fr'] is number %}
+                            <tr>
+                                <th scope="row">Définition</th>
+                                <td>{{ v['definition'] }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th scope="row">Définition</th>
+                                <td>{{ v['definition_fr'] }}</td>
+                            </tr>
+                        {% endif %}
 						{% if v['usage_fr'] is number %}
 						{% else %}
 						<tr>
