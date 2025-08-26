@@ -33,7 +33,7 @@ Built using Python Flask, the application transforms a set of CSV files into dat
 
 _init__.py
 freeze.py   Frozen flask script to generate build files
-routes.py   Dynamic flask script
+routes.py   Dynamic flask script (deprecated in newer instances of StaDocGen
 ```
 
 ### Organization of StaDocGen

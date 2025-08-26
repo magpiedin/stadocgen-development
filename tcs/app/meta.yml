@@ -1,0 +1,11 @@
+title:            "Taxon Concept Schema (TCS)"
+acronym:          tcs
+links:
+  taskGroup:      "https://www.tdwg.org/community/tnc/tcs2/"
+  landingPage:    # URL. Landing Page URL of the standard documentation
+  githubRepository:  "https://github.com/tdwg/tcs2"
+sources:
+  tabulated:     # Simple Array. Full URL to raw source files (url should being with raw.githubusercontent.com) in a YAML List
+  markdown:      # Simple Array. Full URL of Source Markdown content files as YAML List
+last-modified:   # Date. Date file last modified
+note:            # General remarks about the StaDocGen instance for standard

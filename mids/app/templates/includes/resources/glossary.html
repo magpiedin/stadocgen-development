@@ -1,12 +1,13 @@
-<h3 id="3-glossary">MIDS Glossary</h3>
+<h3 id="2-glossary">MIDS Glossary</h3>
     <div class="glossary-wrapper">
-        <dl>
+        <dl class="glossary">
             {% for meta in glossary_metadata.glossary %}
-                <dt id="{{ meta.id }}">{{ meta.term }}</dt>
-                <dd>{{ meta.definition }}</dd>
+                <dt id="{{ meta.id }}">{{ meta.prefLabel }}</dt>
+                <dd>{{ meta.definition }}
                 {% if meta.sources %}
-                <dd><span>Sources</span></dd>
+                    <span class="sources">Sources: {{ meta.sources }}</span>
                 {%  endif  %}
+                </dd>
             {% endfor %}
         </dl>
     </div>
