@@ -18,24 +18,29 @@ def copy_files():
 		"https://raw.githubusercontent.com/tdwg/ltc/main/source/terms/ltc_namespaces.csv",
 		"https://raw.githubusercontent.com/tdwg/ltc/main/source/terms/ltc_terms_source.csv",
 		"https://raw.githubusercontent.com/tdwg/ltc/main/source/terms/mapping/ltc_sssom_mapping.csv",
-		"https://raw.githubusercontent.com/tdwg/rs.tdwg.org/refs/heads/master/latimer/latimer-translations.csv"
+		"https://raw.githubusercontent.com/tdwg/rs.tdwg.org/refs/heads/master/latimer/latimer-translations.csv",
+		"https://raw.githubusercontent.com/tdwg/rs.tdwg.org/refs/heads/master/dwc-translations/dwcTranslations.csv"
 	]
 
 	target_dir = str(root_dir) + '/ltc/app/data/sources'
-
 
 	for url in download_urls:
 		file_name = os.path.basename(url)
 		local_path = os.path.join(target_dir, file_name)
 		print(url + ' --> ' + local_path)
 		urllib.request.urlretrieve(url, local_path)
+		if(os.path.basename(local_path) == 'dwcTranslations.csv'):
+			new_filename = 'dwc-translations.csv'
+			new_local_path = os.path.join(target_dir, new_filename)
+			os.rename(local_path, new_local_path)
+
 
 	copy_md_files()
 def copy_md_files():
 	download_urls = [
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/fr/home-content-fr.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/fr/termlist-header-fr.md",
-		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/fr/translation-disclaimer-fr.md"
+		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/fr/translation-disclaimer-fr.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/home-content.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/quick-reference-header.md",
 		"https://raw.githubusercontent.com/tdwg/ltc/refs/heads/main/source/md/resources-header.md",
@@ -54,5 +59,6 @@ def copy_md_files():
 		print(url)
 		print(url + ' --> ' + local_path)
 		urllib.request.urlretrieve(url, local_path)
+
 
 copy_files()

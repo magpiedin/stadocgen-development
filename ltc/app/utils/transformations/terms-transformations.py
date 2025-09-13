@@ -96,27 +96,7 @@ ltc_df = pd.merge(ltc_df, dt_df[['compound_name', 'datatype']], on='compound_nam
 # Resave
 ltc_df.to_csv(term_csv, index=False, encoding='utf8')
 
-# ------------------------------------------------------------
-# Translations
 
-translations_yml = str(path)+'/utils/translations.yml'
-yml_dict = []
-for yf in glob.glob(translations_yml, recursive=True):
-    with open(yf, 'r') as f:
-        meta = yaml.load(f, Loader=yaml.FullLoader)
-
-    for k in meta['Languages']:
-        lang = k['code']
-        translations_source = str(path) + '/data/output/ltc-' + lang + '-translations.csv'
-        translations_target= str(path) + '/data/output/ltc-translations-termlist.csv'
-
-        translations_df = pd.read_csv(translations_source, encoding='utf8')
-
-        # Merge Termlist with Translation
-        lang_df = pd.merge(ltc_df, translations_df[['term_local_name','label_'+lang,'definition_'+lang,'usage_'+lang,'notes_'+lang]], on='term_local_name', how='left')
-
-        # Save New Translation Termlist
-        lang_df.to_csv( translations_target, index=False, encoding='utf8')
 
 
 

@@ -48,3 +48,32 @@ for k in meta['Languages']:
     translations_target = str(project_dir) + '/data/output/ltc-'+lang+'-translations.csv'
 
     lang_df.to_csv(translations_target, index=False, encoding='utf8')
+
+
+# ------------------------------------------------------------
+# Translations
+
+path = current_dir.parent.parent
+ltc_csv = str(path)+'/data/output/ltc-termlist.csv'
+ltc_df = pd.read_csv(ltc_csv, encoding="utf8")
+
+translations_yml = str(path)+'/utils/translations.yml'
+yml_dict = []
+for yf in glob.glob(translations_yml, recursive=True):
+    with open(yf, 'r') as f:
+        meta = yaml.load(f, Loader=yaml.FullLoader)
+
+    for k in meta['Languages']:
+        lang = k['code']
+        translations_source = str(path) + '/data/output/ltc-' + lang + '-translations.csv'
+        translations_target= str(path) + '/data/output/ltc-translations-termlist.csv'
+
+        translations_df = pd.read_csv(translations_source, encoding='utf8')
+
+        # Merge Termlist with Translation
+        lang_init_df = pd.merge(ltc_df, translations_df[['term_local_name','label_'+lang,'definition_'+lang,'usage_'+lang,'notes_'+lang]], on='term_local_name', how='left')
+        lang_df = lang_init_df.drop_duplicates()
+        lang_df = lang_df.drop_duplicates()
+
+        # Save New Translation Termlist
+        lang_df.to_csv( translations_target, index=False, encoding='utf8')
