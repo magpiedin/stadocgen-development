@@ -1,0 +1,47 @@
+# Configuration for the Latimer Core (LtC) standard.
+metadata:
+  title: "Latimer Core"
+  acronym: "LtC"
+  logo: "static/custom/images/ltc-logo.png" # This is a local static file
+  links:
+    landingPage: "https://ltc.tdwg.org"
+    githubRepo: "https://github.com/tdwg/ltc"
+
+# These scripts need to be run before the build process starts.
+# Paths are relative to the project root.
+build_scripts:
+  - "shared-generator/utils/transformations/ltc/terms-transformations.py"
+  - "shared-generator/utils/transformations/ltc/sssom-transformations.py"
+  - "shared-generator/utils/transformations/ltc/translation-transformations.py"
+
+routes:
+  - path: "/"
+    name: "home"
+    template: "home.html"
+    content_md: "md/home-content.md"
+    content_extra:
+      - name: "translationDisclaimer"
+        source: "md/translation-disclaimer.md"
+
+  - path: "/terms/"
+    name: "terms"
+    title: "Term List"
+    template: "term-list.html"
+    content_md: "md/termlist-header.md"
+    data_provider: "get_terms_data"
+
+  - path: "/quick-reference/"
+    name: "quick_reference"
+    title: "Quick Reference Guide"
+    template: "quick-reference.html"
+    content_md: "md/quick-reference-header.md"
+    data_provider: "get_quick_reference_data"
+
+  - path: "/resources/"
+    name: "resources"
+    title: "Resources"
+    template: "resources.html"
+    content_md: "md/resources-header.md"
+    content_extra:
+      - name: "sssomRefMarkdown"
+        source: "md/sssom-reference.md"

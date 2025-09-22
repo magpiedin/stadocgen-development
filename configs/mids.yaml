@@ -1,0 +1,50 @@
+# Configuration for the MIDS standard.
+metadata:
+  title: "Minimum Information about a Digital Specimen"
+  acronym: "MIDS"
+  links:
+    task_group: "https://www.tdwg.org/community/cd/mids/"
+    landing_page: "https://tdwg.github.io/mids/index.html"
+    github_repository: "https://github.com/tdwg/mids"
+
+build_scripts:
+  - "shared-generator/utils/transformations/mids/information_elements_transformations.py"
+  - "shared-generator/utils/transformations/mids/levels_transformations.py"
+  - "shared-generator/utils/transformations/mids/process_source_mappings.py"
+  - "shared-generator/utils/transformations/mids/merge_source_files.py"
+
+routes:
+  - path: "/"
+    name: "home"
+    template: "home.html"
+    content_md: "md/home-content.md"
+
+  - path: "/information-elements/"
+    name: "information_elements"
+    title: "Information Elements"
+    template: "information-elements.html"
+    content_md: "md/information-elements-header.md"
+    data_provider: "get_mids_information_elements_data"
+
+  - path: "/mappings/"
+    name: "mappings"
+    title: "MIDS Mappings"
+    template: "mappings.html"
+    content_md: "md/mappings-header.md"
+    data_provider: "get_mids_mappings_data"
+    content_extra:
+      - name: "sssomReference"
+        source: "md/sssom-reference.md"
+
+  - path: "/resources/"
+    name: "resources"
+    title: "Resources"
+    template: "resources.html"
+    content_md: "md/resources-content.md"
+    data_provider: "get_mids_resources_data"
+
+  - path: "/about/"
+    name: "about"
+    title: "About MIDS"
+    template: "about.html"
+    content_md: "md/about-content.md"

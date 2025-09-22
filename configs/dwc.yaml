@@ -1,0 +1,15 @@
+# Configuration for the Darwin Core (DwC) standard.
+metadata:
+  title: "Darwin Core"
+  acronym: "DwC"
+  logo: "https://tdwg.github.io/chrono/assets/theme/images/tdwg-logo-short.svg"
+  links:
+    landingPage: "https://dwc.tdwg.org/terms/"
+    githubRepo: "https://github.com/tdwg/dwc"
+
+# Define the pages (routes) for the website.
+routes:
+  - path: "/"
+    name: "home"
+    template: "home.html"
+    content_md: "md/home-content.md"

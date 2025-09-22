@@ -1,0 +1,41 @@
+# Configuration for the Mineralogy Extension (MinExt) standard.
+metadata:
+  title: "Mineralogy Extension"
+  acronym: "MinExt"
+  status: "Draft"
+  links:
+    landingPage: "https://mineralogy.tdwg.org"
+    githubRepo: "https://github.com/tdwg/mineralogy"
+
+validation:
+  headings_file: "utils/sources/minext/columns-headings.csv"
+
+build_scripts:
+  - "shared-generator/utils/transformations/minext/terms_transformations.py"
+
+routes:
+  - path: "/"
+    name: "home"
+    template: "home.html"
+    content_md: "md/home-content.md"
+
+  - path: "/terms/"
+    name: "terms"
+    title: "Term List"
+    template: "term-list.html"
+    content_md: "md/termlist-header.md"
+    data_provider: "get_minext_terms_data"
+
+  - path: "/quick-reference/"
+    name: "quick_reference"
+    title: "Quick Reference Guide"
+    template: "quick-reference.html"
+    content_md: "md/quick-reference-header.md"
+    data_provider: "get_minext_quick_reference_data"
+
+  - path: "/term-scopes/"
+    name: "term_scopes"
+    title: "Terms by Scope"
+    template: "term-scopes.html"
+    content_md: "md/scopes-header.md"
+    data_provider: "get_minext_term_scopes_data"

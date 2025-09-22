@@ -1,0 +1,29 @@
+<h3 id="3-mineral-scope-terms">Mineralogy Extension Specimen Terms</h3>
+<p>The tables below provides a tabulated quick reference of terms scoped to the specimen level, including names.</p>
+
+<div class="table-outer-wrapper">
+    <div class="term-table-wrapper">
+        <div class="table-responsive print-avoid">
+            <table class="table table-condensed table-sssom table-child striped-rows">
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>Class</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k, v in terms.iterrows() %}
+                        {%  if v['term_scope'] == 'Specimen' %}
+                            <tr>
+                                <td><span href="#{{ v['compound_name'] }}"></span>{{ v['term_local_name'] }}</td>
+                                <td>{{ v['class_name'] }}</td>
+                                <td><a href="#">{{ v['term_uri'] }}</td>
+                            </tr>
+                        {%  endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -250,3 +250,7 @@ app/test.py
 /app/utils/analysis/output
 /.idea
 /.idea
+
+# StaDocGen build output
+output/
+**/build/
