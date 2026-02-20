@@ -10,7 +10,8 @@ mids:MIDS2	mids:QuantitativeLocation	QuantitativeLocation
 mids:MIDS1	mids:Chronostratigraphy	Chronostratigraphy
 mids:MIDS2	mids:StratigraphicContext	StratigraphicContext
 mids:MIDS3	mids:GeographicalLocalityID	GeographicalLocalityID
-mids:MIDS3	mids:InstitutionID	InstitutionID
+mids:MIDS3	mids:OrganizationID	OrganizationID
 mids:MIDS3	mids:IdentifiedAsID	IdentifiedAsID
 mids:MIDS3	mids:IdentifiedByID	IdentifiedByID
 mids:MIDS3	mids:MediaID	MediaID
+mids:MIDS3	mids:CollectingAgentID	CollectingAgentID

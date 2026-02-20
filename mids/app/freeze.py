@@ -52,11 +52,23 @@ def home():
 
 @app.route('/information-elements/')
 def information_elements():
-    home_mdfile = str(relpath) + 'md/information-elements-header.md'
-    with open(home_mdfile, encoding="utf8") as f:
-        marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+    info_elements_mdfile = str(relpath) + 'md/information-elements-header.md'
+    disciplines_section_header_mdfile = str(relpath) + 'md/disciplines-section-header.md'
+    information_elements_section_header_mdfile = str(relpath) + 'md/information-elements-section-header.md'
+    mids_levels_section_header_mdfile = str(relpath) + 'md/mids-levels-section-header.md'
 
-    discipline_terms_tsv = str(relpath) + 'data/output/disciplines_terms.tsv'
+
+    with open(info_elements_mdfile, encoding="utf8") as f:
+        info_elements_marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+    with open(disciplines_section_header_mdfile, encoding="utf8") as f:
+        disciplines_header_marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+    with open(information_elements_section_header_mdfile, encoding="utf8") as f:
+        info_elements_section_header_marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+    with open(mids_levels_section_header_mdfile, encoding="utf8") as f:
+        mids_levels_section_header_marked_text = markdown2.markdown(f.read(), extras=["tables", "fenced-code-blocks"])
+
+    # Read Disciplines
+    discipline_terms_tsv = str(relpath) + 'data/output/discipline_terms.tsv'
     discipline_terms_df = pd.read_csv(discipline_terms_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
     discipline_terms_df = discipline_terms_df.replace(r'\n', ' ', regex=True)
 
@@ -85,10 +97,9 @@ def information_elements():
                          how="left")
     merged_df.rename(columns={'examples_list_y': 'examples_list'}, inplace=True)
 
+    # Schemas
     schemas_tsv = str(relpath) + 'data/output/schemas.tsv'
     schemas_df = pd.read_csv(schemas_tsv, sep='\t', lineterminator='\n', encoding='utf-8')
-
-    # Simple Schemas Dataframe
     schemas = schemas_df.sort_values(by=['level', 'informationElement'])
 
     # Schemas by Level
@@ -102,28 +113,27 @@ def information_elements():
             'schemasList': schemas_grpdict[i]
     })
 
-    sizes_df = schemas_df.groupby(['discipline','level']).size().to_frame('count')
-    max_counts = sizes_df.groupby('level').max()
-
-
-
-
+    #sizes_df = schemas_df.groupby(['discipline','level']).size().to_frame('count')
+    #max_counts = sizes_df.groupby('level').max()
 
     return render_template('information-elements.html',
-                           headerMarkdown=Markup(marked_text),
-                           pageTitle='Information Elements',
-                           title=meta['title'],
-                           acronym=meta['acronym'],
-                           landingPage=meta['links']['landing_page'],
-                           githubRepo=meta['links']['github_repository'],
-                           slug='information-elements',
-                           levels=levels,
-                           informationElements=merged_df,
-                           examples=examples_df,
-                           disciplinesTerms=discipline_terms_df,
-                           schemas=schemas,
-                           schemasByLevel=schemas_by_level
-                           )
+                        headerMarkdown=Markup(info_elements_marked_text),
+                        disciplinesSectionHeaderMarkdown=Markup(disciplines_header_marked_text),
+                        infoElementsSectionHeaderMarkdown=Markup(info_elements_section_header_marked_text),
+                        midsLevelsSectionHeaderMarkdown=Markup(mids_levels_section_header_marked_text),
+                        pageTitle='Information Elements',
+                        title=meta['title'],
+                        acronym=meta['acronym'],
+                        landingPage=meta['links']['landing_page'],
+                        githubRepo=meta['links']['github_repository'],
+                        slug='information-elements',
+                        levels=levels,
+                        informationElements=merged_df,
+                        examples=examples_df,
+                        disciplinesTerms=discipline_terms_df,
+                        schemas=schemas,
+                        schemasByLevel=schemas_by_level
+                        )
 
 @app.route('/mappings/')
 def mappings():

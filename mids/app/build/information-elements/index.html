@@ -78,35 +78,31 @@
 			<div class="col-lg-3 mx-auto">	
 				<div class="toc">
     <h6>On this page</h6>
-    <ul>
-        <li><a href="#1-introduction">1 Introduction</a>
-            <ul>
-                <li><a href="#11-status-of-the-content-of-this-document">1.1 Status of the content of this document</a></li>
-                <li><a href="#12-rfc-2119-key-words">1.2 RFC 2119 key words</a></li>
-                <li><a href="#13-categories-of-terms">1.3 Categories of Terms</a></li>
-            </ul>
-        </li>
-        <li><a href="#2-borrowed-vocabulary">2 Borrowed Vocabulary</a></li>
-        <li><a href="#3-namespace-prefixes-term-names">3 Namespaces, Prefixes and Term Names</a></li>
-        <li><a href="#4-disciplines">4 Disciplines</a></li>
-        <li><a href="#5-mids-levels">5 MIDS Levels</a></li>
-        <li><a href="#6-discipline-schemas">6 Discipline Schemas</a>
-             <ul>
-                <li><a href="#61-biology-schema">6.1 Biology Schema</a></li>
-                <li><a href="#62-paleontology-schema">6.2 Paleontology Schema</a></li>
-                <li><a href="#63-geology-schema">6.3 Geology Schema</a></li>
-            </ul>
-        </li>
-        <li><a href="#7-information-element-index">7 Information Elements</a>
-             <ul>
-                <li><a href="#71-information-elements-schema">7.1 Information Elements Schema</a></li>
-            </ul>
-        </li>
-
-
-        <li></li>
-        <li><a href="#top"><em>Return to Top</em></a></li>
-    </ul>
+        <ul>
+            <li><a href="#1-introduction">1 Introduction</a></li>
+            <li><a href="#2-borrowed-vocabulary">2 Borrowed Vocabulary</a></li>
+            <li><a href="#3-namespace-prefixes-term-names">3 Namespaces, Prefixes and Term Names</a></li>
+            <li><a href="#4-mids-levels">4 MIDS Levels</a></li>
+            <li><a href="#5-disciplines">5 Disciplines</a>
+                <ul>
+                    <li><a href="#51-disciplines-terms">5.1 Discipline Terms</a></li>
+                    <li><a href="#52-discipline-schemas">5.2 Discipline Schemas</a>
+                         <ul>
+                            <li><a href="#521-biology-schema">5.2.1 Biology Schema</a></li>
+                            <li><a href="#522-paleontology-schema">5.2.2 Paleontology Schema</a></li>
+                            <li><a href="#523-geology-schema">5.2.3 Geology Schema</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#6-information-element-index">6 Information Elements</a>
+                 <ul>
+                    <li><a href="#61-information-elements-schema">6.1 Information Elements Schema</a></li>
+                </ul>
+            </li>
+            <li></li>
+            <li><a href="#top"><em>Return to Top</em></a></li>
+        </ul>
 </div>
   
   
@@ -144,26 +140,27 @@
 <p><strong>Bibliographic citation</strong>
 : MIDS Task Group. 2025. MIDS List of Information Elements. Biodiversity Information Standards (TDWG). DRAFT</p>
 
+<p><span id="1-introduction"></span></p>
+
 <h2>1 Introduction</h2>
 
-<p>This document contains information elements that are part of the most recent version of the Minimum Information about a Digital Specimen specification.</p>
+<p>This document contains all information elements that are part of the most recent version of the Minimum Information about a Digital Specimen (MIDS) specification. It also lists all recognized MIDS levels and schemas that bundle sets of information elements important for distinct specimen disciplines.</p>
 
 <h3>1.1 Status of the content of this document</h3>
 
-<p>DRAFT
-In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequiredBy are normative. The status of the SKOS mappings are to be decided. Labels and the values of all other properties (such as Usage Note, Purpose and Examples) are non-normative (informative).</p>
+<p>In the list of Information Elements, the Element Name, Element URI, Label, Level, Definition, isRequiredBy are normative. Labels and the values of all other properties (such as Mappings, Usage Note, Purpose and Examples) are non-normative (informative). Definitions of MIDS levels, disciplines and discipline schemas are normative.</p>
 
 <h3>1.2 RFC 2119 key words</h3>
 
 <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
 
-<h3>1.3 Categories of information elements</h3>
+<h3>1.3 Definitions</h3>
 
-<p>DRAFT</p>
+<p><span id="2-borrowed-vocabulary"></span></p>
 
 <h2>2 Borrowed Vocabulary</h2>
 
-<p>MIDS does not borrow terms from other vocabularies, but instead maps to those terms. When terms are mapped, MIDS uses the IRIs, common abbreviations, and namespace prefixes in use in those vocabularies. The IRIs are normative, but abbreviations and namespace prefixes have no impact except as an aid to reading the documentation.</p>
+<p>MIDS does not borrow terms from other standards, but instead uses mappings from MIDS information elements to those terms. When terms are mapped, MIDS uses the IRIs, common abbreviations, and namespace prefixes in use by those standards.</p>
 
 <p>Table 1. Vocabularies from which terms have been borrowed (non-normative)</p>
 
@@ -206,54 +203,20 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
 </tbody>
 </table>
 
+<p><span id="3-namespace-prefixes-term-names"></span></p>
+
 <h2>3 Namespaces, Prefixes and Term Names</h2>
 
-<p>The namespace of MIDS information elements may be (http://rs.tdwg.org/mids/elements/xxxx) but this is yet to be confirmed. In the table of terms, each information element entry has a row with the information element name. This information element name is generally an “unqualified name” preceded by a widely accepted prefix designating an abbreviation for the namespace. It is RECOMMENDED that implementers who need a namespace prefix for the MIDS namespace use mids. In this web document, hovering over a term in the Index By Information Element Name list below will reveal a complete URL that can be used in other web documents to link to this document’s treatment of that element.</p>
+<p>The namespace of MIDS information elements may be (http://rs.tdwg.org/mids/elements/xxxx) but this is yet to be confirmed. In the table of information elements, each entry has an information element name in Pascal Case to be used with this namespace. It is RECOMMENDED that implementers who need a namespace prefix for the MIDS namespace use <code>mids</code>. In this web document, hovering over a term in the Index By Information Element Name list below will reveal a complete URL that can be used in other web documents to link to this document’s treatment of that element.</p>
 
 <p>Please note that the names of the information elements are still in draft and have not yet been ratified. They may therefore be subject to change.</p>
 
-<p><strong><em>Pending</em></strong></p>
-
 				</div>
-                <h2 id="4-disciplines">4 Disciplines</h2>
+                <h2 id="4-mids-levels">4 MIDS Levels</h2>
+<p><p>The MIDS framework provides a structured approach to assess the digitisation status of specimens, with four progressive levels, each building on the previous one. It was developed with input from the community and reflects real-world digitisation practices, taking into account available resources and time.</p>
 
-<h3 id="41-disciplines-terms">4.1 Discipline Terms</h3>
-<div class="disciplines-table-wrapper">
-    <div class="table-responsive print-avoid">
-        <table class="table table-compact table-terms">
-            <thead>
-                <tr>
-                    <th>Term</th>
-                    <th>Definition</th>
-                    <th>Note</th>
-                    <th>Source</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                    <tr id="Biology">
-                        <td>Biology</td>
-                        <td>Biology is the science of life. It is concerned with the characteristics and behaviors of organisms</td>
-                        <td>Modern Science Ontology [https://w3id.org/skgo/modsci#Biology]</td>
-                    </tr>
-                
-                    <tr id="Geology">
-                        <td>Geology</td>
-                        <td>Study of the planet earth, its composition, structure, physical and chemical processes, and history since its origin.</td>
-                        <td>USGS Thesaurus [https://apps.usgs.gov/thesaurus/USGSThesaurus/geology]</td>
-                    </tr>
-                
-                    <tr id="Paleontology">
-                        <td>Paleontology</td>
-                        <td>Study of life in past geologic time based on fossil plants and animals.</td>
-                        <td>USGS Thesaurus [https://apps.usgs.gov/thesaurus/USGSThesaurus/paleontology]</td>
-                    </tr>
-                
-            </tbody>
-        </table>
-    </div>
-</div>
-                <h2 id="5-mids-levels">5 MIDS Levels</h2>
+<p>MIDS Levels 0 and 1 are generic for all specimens or collection items. In MIDS Level 2 and 3 a distinction is made between biological, geological and palaeontological specimens for the information required.</p>
+</p>
 <div class="term-table-wrapper">
     <div class="table-responsive print-avoid">
         <table class="table table-compact table-terms">
@@ -302,17 +265,54 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
 
 
 
-                <h2 id="6-discipline-schemas">6 Discipline Schemas</h2>
-
+                <h2 id="5-disciplines">5 Disciplines</h2>
+<p><p>The MIDS task group currently recognises three disciplines for specimen data to enable different digitisation priorities to be accepted for different collections: Biology, Geology, Paleontology. Each discipline has a schema for the information elements, defining at which level each element is required. Each discipline also has mapping schemas, requiring datasets to be allocated to a schema for calculation to be undertaken.</p>
+</p>
+<h3 id="51-disciplines-terms">5.1 Discipline Terms</h3>
+<div class="disciplines-table-wrapper">
+    <div class="table-responsive print-avoid">
+        <table class="table table-compact table-terms">
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <tr id="Biology">
+                        <td>Biology</td>
+                        <td>Biology is the science of life. It is concerned with the characteristics and behaviors of organisms</td>
+                        <td><a href="">Modern Science Ontology</a></td>
+                    </tr>
+                
+                    <tr id="Geology">
+                        <td>Geology</td>
+                        <td>Study of the planet earth, its composition, structure, physical and chemical processes, and history since its origin</td>
+                        <td><a href="">USGS Thesaurus</a></td>
+                    </tr>
+                
+                    <tr id="Paleontology">
+                        <td>Paleontology</td>
+                        <td>Study of life in past geologic time based on fossil plants and animals</td>
+                        <td><a href="">USGS Thesaurus</a></td>
+                    </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+                <h2 id="52-discipline-schemas">5.2 Discipline Schemas</h2>
 <div class="row">
     <div class="col-md-4">
-        <h3 id="61-biology-schema">6.1 Biology</h3>
+        <h3 id="521-biology-schema">5.2.1 Biology</h3>
     </div>
     <div class="col-md-4">
-        <h3 id="62-paleontology-schema">6.2 Paleontology</h3>
+        <h3 id="522-paleontology-schema">5.2.2 Paleontology</h3>
     </div>
     <div class="col-md-4">
-        <h3 id="63-geology-schema">6.3 Geology</h3>
+        <h3 id="523-geology-schema">5.2.3 Geology</h3>
     </div>
 </div>
 <!-- --------------------------------------------------------------------------------------------------- -->
@@ -337,18 +337,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                         <span class="level-label MIDS0"><a href="#MIDS0">MIDS0</a></span>
                         <span class="element-label"><a href="#PhysicalSpecimenID">PhysicalSpecimenID</a></span>
                     </li>
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
                 
             
                 
@@ -554,18 +542,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
             
                 
             
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
         </ul>
     </div>
     <div class="col-md-4">
@@ -589,18 +565,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                         <span class="level-label MIDS0"><a href="#MIDS0">MIDS0</a></span>
                         <span class="element-label"><a href="#PhysicalSpecimenID">PhysicalSpecimenID</a></span>
                     </li>
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
                 
             
                 
@@ -818,18 +782,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
             
                 
             
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
         </ul>
     </div>
     <div class="col-md-4">
@@ -896,18 +848,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                         <span class="level-label MIDS1"><a href="#MIDS1">MIDS1</a></span>
                         <span class="element-label"><a href="#ObjectType">ObjectType</a></span>
                     </li>
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
                 
             
                 
@@ -1093,18 +1033,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
             
                 
             
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
         </ul>
     </div>
 </div>
@@ -1174,8 +1102,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
-            
-                
                     <li id="Biology_Media_MIDS2">
                         <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
                         <span class="element-label"><a href="#Media">Media</a></span>
@@ -1197,21 +1123,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                     <li id="Biology_QuantitativeLocation_MIDS2">
                         <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
                         <span class="element-label"><a href="#QuantitativeLocation">QuantitativeLocation</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Biology_TypeStatus_MIDS2">
-                        <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
-                        <span class="element-label"><a href="#TypeStatus">TypeStatus</a></span>
                     </li>
                 
             
@@ -1316,8 +1227,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
-            
-                
                     <li id="Paleontology_QualitativeLocation_MIDS2">
                         <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
                         <span class="element-label"><a href="#QualitativeLocation">QualitativeLocation</a></span>
@@ -1342,21 +1251,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                         <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
                         <span class="element-label"><a href="#StratigraphicContext">StratigraphicContext</a></span>
                     </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Paleontology_TypeStatus_MIDS2">
-                        <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
-                        <span class="element-label"><a href="#TypeStatus">TypeStatus</a></span>
-                    </li>
-                
-            
-                
-            
                 
             
                 
@@ -1445,13 +1339,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
-                    <li id="Geology_GeologicalContext_MIDS2">
-                        <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
-                        <span class="element-label"><a href="#GeologicalContext">GeologicalContext</a></span>
-                    </li>
-                
-            
-                
             
                 
             
@@ -1480,21 +1367,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                         <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
                         <span class="element-label"><a href="#StratigraphicContext">StratigraphicContext</a></span>
                     </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Geology_TypeStatus_MIDS2">
-                        <span class="level-label MIDS2"><a href="#MIDS2">MIDS2</a></span>
-                        <span class="element-label"><a href="#TypeStatus">TypeStatus</a></span>
-                    </li>
-                
-            
-                
-            
                 
             
                 
@@ -1608,22 +1480,10 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
                     <li id="Biology_CollectorID_MIDS3">
                         <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#CollectorID">CollectorID</a></span>
+                        <span class="element-label"><a href="#CollectingAgentID">CollectingAgentID</a></span>
                     </li>
-                
-            
                 
             
                 
@@ -1640,31 +1500,20 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
+                    <li id="Biology_IndentifiedAsID_MIDS3">
+                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
+                        <span class="element-label"><a href="#IdentifiedAsID">IdentifiedAsID</a></span>
+                    </li>
+                
+            
+                
+            
+                
+            
+                
                     <li id="Biology_IdentifiedByID_MIDS3">
                         <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
                         <span class="element-label"><a href="#IdentifiedByID">IdentifiedByID</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Biology_IndentifiedAsID_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#IndentifiedAsID">IndentifiedAsID</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Biology_InstitutionID_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#InstitutionID">InstitutionID</a></span>
                     </li>
                 
             
@@ -1685,22 +1534,21 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
             
                 
             
+                
+                    <li id="Biology_OrganizationID_MIDS3">
+                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
+                        <span class="element-label"><a href="#OrganizationID">OrganizationID</a></span>
+                    </li>
+                
+            
+                
+            
+                
+            
         </ul>
     </div>
     <div class="col-md-4">
         <ul class="discipline-schema-list">
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
             
                 
             
@@ -1789,31 +1637,20 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
+                    <li id="Paleontology_IndentifiedAsID_MIDS3">
+                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
+                        <span class="element-label"><a href="#IdentifiedAsID">IdentifiedAsID</a></span>
+                    </li>
+                
+            
+                
+            
+                
+            
+                
                     <li id="Paleontology_IdentifiedByID_MIDS3">
                         <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
                         <span class="element-label"><a href="#IdentifiedByID">IdentifiedByID</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Paleontology_IndentifiedAsID_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#IndentifiedAsID">IndentifiedAsID</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Paleontology_InstitutionID_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#InstitutionID">InstitutionID</a></span>
                     </li>
                 
             
@@ -1827,6 +1664,17 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                     <li id="Paleontology_MediaID_MIDS3">
                         <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
                         <span class="element-label"><a href="#MediaID">MediaID</a></span>
+                    </li>
+                
+            
+                
+            
+                
+            
+                
+                    <li id="Paleontology_OrganizationID_MIDS3">
+                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
+                        <span class="element-label"><a href="#OrganizationID">OrganizationID</a></span>
                     </li>
                 
             
@@ -1904,28 +1752,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
-            
-                
-                    <li id="Geology_ChronometricAge_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#ChronometricAge">ChronometricAge</a></span>
-                    </li>
-                
-            
-                
-            
-                
-                    <li id="Geology_CollectorID_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#CollectorID">CollectorID</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
                     <li id="Geology_GeographicalLocalityID_MIDS3">
                         <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
                         <span class="element-label"><a href="#GeographicalLocalityID">GeographicalLocalityID</a></span>
@@ -1937,31 +1763,20 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                 
             
                 
+                    <li id="Geology_IndentifiedAsID_MIDS3">
+                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
+                        <span class="element-label"><a href="#IdentifiedAsID">IdentifiedAsID</a></span>
+                    </li>
+                
+            
+                
+            
+                
+            
+                
                     <li id="Geology_IdentifiedByID_MIDS3">
                         <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
                         <span class="element-label"><a href="#IdentifiedByID">IdentifiedByID</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Geology_IndentifiedAsID_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#IndentifiedAsID">IndentifiedAsID</a></span>
-                    </li>
-                
-            
-                
-            
-                
-            
-                
-                    <li id="Geology_InstitutionID_MIDS3">
-                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
-                        <span class="element-label"><a href="#InstitutionID">InstitutionID</a></span>
                     </li>
                 
             
@@ -1985,87 +1800,24 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
             
                 
             
+                
+            
+                
+                    <li id="Geology_OrganizationID_MIDS3">
+                        <span class="level-label MIDS3"><a href="#MIDS3">MIDS3</a></span>
+                        <span class="element-label"><a href="#OrganizationID">OrganizationID</a></span>
+                    </li>
+                
+            
+                
+            
         </ul>
     </div>
 </div>
-				<h2 id="7-information-element-index">7 Information Elements</h2>
-<h3 id="71-information-elements-schema">7.1 Information Elements Schema</h3>
-
-    
-        <span id="ChronometricAge"></span>
-        <div class="term-table-wrapper">
-            <div class="table-responsive print-avoid">
-                <table class="table table-compact table-terms">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Element Name
-                                <span class="title">ChronometricAge</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Element URI</th>
-                            <td> (Pending)</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Label</th>
-                            <td>ChronometricAge</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Definition</th>
-                            <td>Refers to the interpreted age of a specimen expressed numerically and based on the results of a dating technique such as radiometric dating or dendrochronology</td>
-                        </tr>
-
-                        
-                        
-
-                        
-                            <tr>
-                                <th scope="row">Purpose</th>
-                                <td>Designate specimens with a numeric temporal context</td>
-                            </tr>
-                        
-
-                        
-                            
-
-                        
-                            
-                            <tr>
-                                <th scope="row">isRequiredBy</th>
-                                <td>
-                                    <ul class="td-list">
-                                        
-                                            <li><span>Geology</span></li>
-                                        
-                                    </ul>
-                                </td>
-                            </tr>
-                        
-                         
-                        
-                            <tr>
-                                <th scope="row">Mapppings</th>
-                                <td>
-                                    <a href="../mappings/index.html#dwc-mappings-anchor" class="anchor-link text-block">Darwin Core Mappings</a>
-                                    <a href="../mappings/index.html#abcd-mappings-anchor" class="anchor-link text-block">ABCD Mappings</a>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
-                <div class="sssom-table-wrapper ">
-    
-</div>
-            </div>
-        </div>
-        <style>
-        .text-block {
-            display: block;
-        }
-        </style>
-    
+				<h2 id="6-information-element-index">6 Information Elements</h2>
+<p><p>MIDS defines the information required at each level of digitisation and structures the information into individual elements. In order to measure the level of digitisation of collections where information may be captured in many different database fields and mapped to many different TDWG Standards terms, a construct is needed which groups related fields into a structured framework so that the presence of data can be calculated. This construct is the MIDS Information Element.</p>
+</p>
+<h3 id="61-information-elements-schema">6.1 Information Elements Schema</h3>
 
     
         <span id="Chronostratigraphy"></span>
@@ -2239,6 +1991,103 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
     
 
     
+        <span id="CollectingAgentID"></span>
+        <div class="term-table-wrapper">
+            <div class="table-responsive print-avoid">
+                <table class="table table-compact table-terms">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Element Name
+                                <span class="title">CollectingAgentID</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Element URI</th>
+                            <td> (Pending)</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Label</th>
+                            <td>Collecting Agent ID</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Definition</th>
+                            <td>A list (concatenated and separated) of the identifier(s) for the person, people, groups, or expeditions responsible for collecting the specimen.</td>
+                        </tr>
+
+                        
+                            <tr>
+                                <th scope="row">Usage Note</th>
+                                <td>It is strongly recommended to use resolvable ORCiD identifiers for people, or Wikidata identifiers for people or expeditions. It is also recommended to list the primary collectorID, especially one who applies a field/collecting number, first.</td>
+                            </tr>
+                        
+
+                        
+                            <tr>
+                                <th scope="row">Purpose</th>
+                                <td>To uniquely identify the collector of a specimen in a machine readable format.</td>
+                            </tr>
+                        
+
+                        
+                            
+
+                        
+                            
+                            <tr>
+                                <th scope="row">isRequiredBy</th>
+                                <td>
+                                    <ul class="td-list">
+                                        
+                                            <li><span>Biology</span></li>
+                                        
+                                            <li><span>Geology</span></li>
+                                        
+                                            <li><span>Palaeontology</span></li>
+                                        
+                                    </ul>
+                                </td>
+                            </tr>
+                        
+                         
+                            
+                            <tr>
+                                <th scope="row">Examples</th>
+                                <td>
+                                    <ul class="block-list">
+                                        
+                                            <li><span>https://orcid.org/0000-0003-1568-xxxx</span></li>
+                                        
+                                            <li><span>https://www.wikidata.org/wiki/Q94522</span></li>
+                                        
+                                    </ul>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <th scope="row">Mapppings</th>
+                                <td>
+                                    <a href="../mappings/index.html#dwc-mappings-anchor" class="anchor-link text-block">Darwin Core Mappings</a>
+                                    <a href="../mappings/index.html#abcd-mappings-anchor" class="anchor-link text-block">ABCD Mappings</a>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+                <div class="sssom-table-wrapper ">
+    
+</div>
+            </div>
+        </div>
+        <style>
+        .text-block {
+            display: block;
+        }
+        </style>
+    
+
+    
         <span id="CollectingNumber"></span>
         <div class="term-table-wrapper">
             <div class="table-responsive print-avoid">
@@ -2309,103 +2158,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                                             <li><span>254</span></li>
                                         
                                             <li><span>s.n.</span></li>
-                                        
-                                    </ul>
-                                </td>
-                            </tr>
-                        
-                            <tr>
-                                <th scope="row">Mapppings</th>
-                                <td>
-                                    <a href="../mappings/index.html#dwc-mappings-anchor" class="anchor-link text-block">Darwin Core Mappings</a>
-                                    <a href="../mappings/index.html#abcd-mappings-anchor" class="anchor-link text-block">ABCD Mappings</a>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
-                <div class="sssom-table-wrapper ">
-    
-</div>
-            </div>
-        </div>
-        <style>
-        .text-block {
-            display: block;
-        }
-        </style>
-    
-
-    
-        <span id="CollectorID"></span>
-        <div class="term-table-wrapper">
-            <div class="table-responsive print-avoid">
-                <table class="table table-compact table-terms">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Element Name
-                                <span class="title">CollectorID</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Element URI</th>
-                            <td> (Pending)</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Label</th>
-                            <td>Collector ID</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Definition</th>
-                            <td>A list (concatenated and separated) of the identifier(s) for the person, people, groups, or expeditions responsible for collecting the specimen.</td>
-                        </tr>
-
-                        
-                            <tr>
-                                <th scope="row">Usage Note</th>
-                                <td>It is strongly recommended to use resolvable ORCiD identifiers for people, or Wikidata identifiers for people or expeditions. It is also recommended to list the primary collectorID, especially one who applies a field/collecting number, first.</td>
-                            </tr>
-                        
-
-                        
-                            <tr>
-                                <th scope="row">Purpose</th>
-                                <td>To uniquely identify the collector of a specimen in a machine readable format.</td>
-                            </tr>
-                        
-
-                        
-                            
-
-                        
-                            
-                            <tr>
-                                <th scope="row">isRequiredBy</th>
-                                <td>
-                                    <ul class="td-list">
-                                        
-                                            <li><span>Biology</span></li>
-                                        
-                                            <li><span>Geology</span></li>
-                                        
-                                            <li><span>Palaeontology</span></li>
-                                        
-                                    </ul>
-                                </td>
-                            </tr>
-                        
-                         
-                            
-                            <tr>
-                                <th scope="row">Examples</th>
-                                <td>
-                                    <ul class="block-list">
-                                        
-                                            <li><span>https://orcid.org/0000-0003-1568-xxxx</span></li>
-                                        
-                                            <li><span>https://www.wikidata.org/wiki/Q94522</span></li>
                                         
                                     </ul>
                                 </td>
@@ -2591,7 +2343,11 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                                 <td>
                                     <ul class="block-list">
                                         
-                                            <li><span>nan</span></li>
+                                            <li><span>decimalLatitude:-41.0983423 + decimalLongitude:-121.1761111 + geodeticDatum:EPSG:4326 + coordinateUncertaintyInMeters:30 + coordinatePrecision:0.00001</span></li>
+                                        
+                                            <li><span>POLYGON ((10 20, 11 20, 11 21, 10 21, 10 20)) + EPSG:4326</span></li>
+                                        
+                                            <li><span>https://www.geonames.org/7839420</span></li>
                                         
                                     </ul>
                                 </td>
@@ -2777,105 +2533,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                             </tr>
                         
                          
-                        
-                            <tr>
-                                <th scope="row">Mapppings</th>
-                                <td>
-                                    <a href="../mappings/index.html#dwc-mappings-anchor" class="anchor-link text-block">Darwin Core Mappings</a>
-                                    <a href="../mappings/index.html#abcd-mappings-anchor" class="anchor-link text-block">ABCD Mappings</a>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
-                <div class="sssom-table-wrapper ">
-    
-</div>
-            </div>
-        </div>
-        <style>
-        .text-block {
-            display: block;
-        }
-        </style>
-    
-
-    
-        <span id="InstitutionID"></span>
-        <div class="term-table-wrapper">
-            <div class="table-responsive print-avoid">
-                <table class="table table-compact table-terms">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Element Name
-                                <span class="title">InstitutionID</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Element URI</th>
-                            <td> (Pending)</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Label</th>
-                            <td>Institution ID</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Definition</th>
-                            <td>An identifier for the institution having custody of the object(s).</td>
-                        </tr>
-
-                        
-                            <tr>
-                                <th scope="row">Usage Note</th>
-                                <td>It is strongly recommended to use a globally unique persistent and resolvable identifier such as GrSciColl, ROR.</td>
-                            </tr>
-                        
-
-                        
-                            <tr>
-                                <th scope="row">Purpose</th>
-                                <td>To allow a user (human or machine) to locate the physical location of the specimen.</td>
-                            </tr>
-                        
-
-                        
-                            
-
-                        
-                            
-                            <tr>
-                                <th scope="row">isRequiredBy</th>
-                                <td>
-                                    <ul class="td-list">
-                                        
-                                            <li><span>Biology</span></li>
-                                        
-                                            <li><span>Geology</span></li>
-                                        
-                                            <li><span>Palaeontology</span></li>
-                                        
-                                    </ul>
-                                </td>
-                            </tr>
-                        
-                         
-                            
-                            <tr>
-                                <th scope="row">Examples</th>
-                                <td>
-                                    <ul class="block-list">
-                                        
-                                            <li><span>https://ror.org/01xtthb56</span></li>
-                                        
-                                            <li><span>https://www.gbif.org/grscicoll/collection/772f9e37-4643-452b-82b4-a06550283096</span></li>
-                                        
-                                            <li><span>https://www.gbif.org/grscicoll/institution/e3d4dcc4-81e2-444c-8a5c-41d1044b5381</span></li>
-                                        
-                                    </ul>
-                                </td>
-                            </tr>
                         
                             <tr>
                                 <th scope="row">Mapppings</th>
@@ -3667,6 +3324,105 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
     
 
     
+        <span id="OrganizationID"></span>
+        <div class="term-table-wrapper">
+            <div class="table-responsive print-avoid">
+                <table class="table table-compact table-terms">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Element Name
+                                <span class="title">OrganizationID</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Element URI</th>
+                            <td> (Pending)</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Label</th>
+                            <td>Organization ID</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Definition</th>
+                            <td>An identifier for the institution having custody of the object(s).</td>
+                        </tr>
+
+                        
+                            <tr>
+                                <th scope="row">Usage Note</th>
+                                <td>It is strongly recommended to use a globally unique persistent and resolvable identifier such as GrSciColl, ROR.</td>
+                            </tr>
+                        
+
+                        
+                            <tr>
+                                <th scope="row">Purpose</th>
+                                <td>To allow a user (human or machine) to locate the physical location of the specimen.</td>
+                            </tr>
+                        
+
+                        
+                            
+
+                        
+                            
+                            <tr>
+                                <th scope="row">isRequiredBy</th>
+                                <td>
+                                    <ul class="td-list">
+                                        
+                                            <li><span>Biology</span></li>
+                                        
+                                            <li><span>Geology</span></li>
+                                        
+                                            <li><span>Palaeontology</span></li>
+                                        
+                                    </ul>
+                                </td>
+                            </tr>
+                        
+                         
+                            
+                            <tr>
+                                <th scope="row">Examples</th>
+                                <td>
+                                    <ul class="block-list">
+                                        
+                                            <li><span>https://ror.org/01xtthb56</span></li>
+                                        
+                                            <li><span>https://www.gbif.org/grscicoll/collection/772f9e37-4643-452b-82b4-a06550283096</span></li>
+                                        
+                                            <li><span>https://www.gbif.org/grscicoll/institution/e3d4dcc4-81e2-444c-8a5c-41d1044b5381</span></li>
+                                        
+                                    </ul>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <th scope="row">Mapppings</th>
+                                <td>
+                                    <a href="../mappings/index.html#dwc-mappings-anchor" class="anchor-link text-block">Darwin Core Mappings</a>
+                                    <a href="../mappings/index.html#abcd-mappings-anchor" class="anchor-link text-block">ABCD Mappings</a>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+                <div class="sssom-table-wrapper ">
+    
+</div>
+            </div>
+        </div>
+        <style>
+        .text-block {
+            display: block;
+        }
+        </style>
+    
+
+    
         <span id="PhysicalSpecimenID"></span>
         <div class="term-table-wrapper">
             <div class="table-responsive print-avoid">
@@ -4019,109 +3775,6 @@ In Section 5, the Element Name, Element URI, Label, Level, Definition, isRequire
                             </tr>
                         
                          
-                        
-                            <tr>
-                                <th scope="row">Mapppings</th>
-                                <td>
-                                    <a href="../mappings/index.html#dwc-mappings-anchor" class="anchor-link text-block">Darwin Core Mappings</a>
-                                    <a href="../mappings/index.html#abcd-mappings-anchor" class="anchor-link text-block">ABCD Mappings</a>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
-                <div class="sssom-table-wrapper ">
-    
-</div>
-            </div>
-        </div>
-        <style>
-        .text-block {
-            display: block;
-        }
-        </style>
-    
-
-    
-        <span id="TypeStatus"></span>
-        <div class="term-table-wrapper">
-            <div class="table-responsive print-avoid">
-                <table class="table table-compact table-terms">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Element Name
-                                <span class="title">TypeStatus</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Element URI</th>
-                            <td> (Pending)</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Label</th>
-                            <td>Type Status</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Definition</th>
-                            <td>An indication of the nomenclatural type status of the specimen, where a null value is taken to mean &#34;Assumed not to be a type&#34;.</td>
-                        </tr>
-
-                        
-                            <tr>
-                                <th scope="row">Usage Note</th>
-                                <td>It is strongly recommended to follow the list of terms included in the relevant codes of nomenclature.</td>
-                            </tr>
-                        
-
-                        
-                            <tr>
-                                <th scope="row">Purpose</th>
-                                <td>The nomenclatural type specimens are some of the most important specimens in a collection, particularly for taxonomic research. They anchor the taxon name to a physical object.</td>
-                            </tr>
-                        
-
-                        
-                            
-
-                        
-                            
-                            <tr>
-                                <th scope="row">isRequiredBy</th>
-                                <td>
-                                    <ul class="td-list">
-                                        
-                                            <li><span>Biology</span></li>
-                                        
-                                    </ul>
-                                </td>
-                            </tr>
-                        
-                         
-                            
-                            <tr>
-                                <th scope="row">Examples</th>
-                                <td>
-                                    <ul class="block-list">
-                                        
-                                            <li><span>Holotype</span></li>
-                                        
-                                            <li><span>Isotype</span></li>
-                                        
-                                            <li><span>Syntype</span></li>
-                                        
-                                            <li><span>Cotype</span></li>
-                                        
-                                            <li><span>Epitype</span></li>
-                                        
-                                            <li><span>Neotype</span></li>
-                                        
-                                            <li><span>Lectotype</span></li>
-                                        
-                                    </ul>
-                                </td>
-                            </tr>
                         
                             <tr>
                                 <th scope="row">Mapppings</th>

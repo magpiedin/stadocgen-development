@@ -1,6 +1,6 @@
-<h2 id="4-disciplines">4 Disciplines</h2>
-
-<h3 id="41-disciplines-terms">4.1 Discipline Terms</h3>
+<h2 id="5-disciplines">5 Disciplines</h2>
+<p>{{ disciplinesSectionHeaderMarkdown }}</p>
+<h3 id="51-disciplines-terms">5.1 Discipline Terms</h3>
 <div class="disciplines-table-wrapper">
     <div class="table-responsive print-avoid">
         <table class="table table-compact table-terms">
@@ -16,7 +16,7 @@
                     <tr id="{{ v['term'] }}">
                         <td>{{ v['term'] }}</td>
                         <td>{{ v['definition'] }}</td>
-                        <td>{% if v['source'] is number %}{% else %}{{ v['source'] }}{% endif %}</td>
+                        <td>{% if v['source'] is number %}{% else %}<a href="{{ v['source_url'] }}">{{ v['source'] }}</a>{% endif %}</td>
                     </tr>
                 {% endfor %}
             </tbody>

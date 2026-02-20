@@ -28,10 +28,10 @@ def process_source_mappings():
 
 	# SOURCE FILES
 	# dwc_tsv = str(root) + '/mids/app/data/source/sssom_dwc_biology_mappings.sssom.tsv'
-	dwc_biology_tsv = str(root) + '/mids/app/data/source/mids_dwc_biology_1.sssom.tsv'
-	dwc_geology_tsv = str(root) + '/mids/app/data/source/mids_dwc_geology_1.sssom.tsv'
-	dwc_paleo_tsv = str(root) + '/mids/app/data/source/mids_dwc_paleontology_1.sssom.tsv'
-	abcd_biology_tsv = str(root) + '/mids/app/data/source/mids_abcd_biology_1.sssom.tsv'
+	dwc_biology_tsv = str(root) + '/mids/app/data/source/mids_dwc-a_biology_1.sssom.tsv'
+	dwc_geology_tsv = str(root) + '/mids/app/data/source/mids_dwc-a_geology_1.sssom.tsv'
+	dwc_paleo_tsv = str(root) + '/mids/app/data/source/mids_dwc-a_paleontology_1.sssom.tsv'
+	abcd_biology_tsv = str(root) + '/mids/app/data/source/mids_abcd2_biology_1.sssom.tsv'
 
 	# TARGET FILES
 	dwc_biology_sssom = str(root) + '/mids/app/data/output/mids-dwc-biology-sssom.tsv'

@@ -10,6 +10,5 @@ mids:MIDS2	mids:QuantitativeLocation	QuantitativeLocation
 mids:MIDS2	mids:CollectingAgent	CollectingAgent
 mids:MIDS2	mids:DateCollected	DateCollected
 mids:MIDS2	mids:CollectingNumber	CollectingNumber
-mids:MIDS2	mids:TypeStatus	TypeStatus
 mids:MIDS2	mids:Media	Media
 mids:MIDS3	mids:MediaID	MediaID

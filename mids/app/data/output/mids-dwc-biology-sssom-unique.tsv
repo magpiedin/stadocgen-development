@@ -12,8 +12,8 @@ mids:MIDS2	mids:DateCollected	DateCollected
 mids:MIDS2	mids:CollectingNumber	CollectingNumber
 mids:MIDS2	mids:Media	Media
 mids:MIDS3	mids:GeographicalLocalityID	GeographicalLocalityID
-mids:MIDS3	mids:InstitutionID	InstitutionID
-mids:MIDS3	mids:CollectorID	CollectorID
+mids:MIDS3	mids:OrganizationID	OrganizationID
+mids:MIDS3	mids:CollectingAgentID	CollectingAgentID
 mids:MIDS3	mids:IdentifiedAsID	IdentifiedAsID
 mids:MIDS3	mids:IdentifiedByID	IdentifiedByID
 mids:MIDS3	mids:MediaID	MediaID
