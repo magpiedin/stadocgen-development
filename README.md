@@ -97,10 +97,6 @@ Once the new build is pushed to the target repo, continue the standard protocol 
 1. If you primarily use conda for virtual environments and package management, you may encounter issue with frozen flask. The only solution at the moment requires editing the package source
 files, which is ill-advised. Fortunately, the same problems have not been encountered when using the package manager, PIP, and a native python virtual environment. 
 
-## App Documentation
-StaDocGen documentation is written and built with Writerside (https://www.jetbrains.com/writerside/). The documentation remains a work in 
-progress. When ready, it will be published to the docs build directory for presentation/publication.
-
 #### Contact
 Ben Norton
-michaenorton.ben@gmail.com
+ben.norton@yale.edu
