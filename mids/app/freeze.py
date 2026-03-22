@@ -152,6 +152,7 @@ def mappings():
     mappings_df_csv['anchor_name'] = mappings_df_csv['term_local_name'].str.lower()
     mappings_df = mappings_df_csv.sort_values(by=['sssom_subject_category','sssom_subject_id','sssom_object_category','sssom_object_id'])
 
+    unique_mappings_df = mappings_df.drop_duplicates(subset=['sssom_subject_category','sssom_subject_id','sssom_object_category','sssom_object_id'])
 
     return render_template('mappings.html',
                            headerMarkdown=Markup(marked_text),
@@ -162,7 +163,7 @@ def mappings():
                            landingPage=meta['links']['landing_page'],
                            githubRepo=meta['links']['github_repository'],
                            slug='mappings',
-                           mappings=mappings_df,
+                           mappings=unique_mappings_df,
                            )
 
 @app.route('/resources/')

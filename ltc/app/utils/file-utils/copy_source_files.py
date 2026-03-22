@@ -1,6 +1,6 @@
 import urllib.request
 import os
-import config as cfg
+import globals as cfg
 
 """
 Copy LtC source files to local directory. Make sure to run the refresh_terms_source.py script to 

@@ -1,6 +1,6 @@
 import urllib.request
 import os
-import config as cfg
+import globals as cfg
 import yaml
 
 with open('app/meta.yml') as metadata:

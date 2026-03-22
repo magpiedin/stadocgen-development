@@ -80,7 +80,7 @@ target/
 
 # IPython
 profile_default/
-ipython_config.py
+ipython_globals.py
 
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
@@ -251,3 +251,5 @@ app/test.py
 /minext/app/utils/schemas/tableschemas
 RF07102025192323338634628.ico
 Desktop.ini
+/.idea
+/.idea

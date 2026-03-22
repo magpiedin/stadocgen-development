@@ -1,4 +1,4 @@
-from config import get_project_root
+from globals import get_project_root
 import pandas as pd
 import shutil
 from datetime import date
