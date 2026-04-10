@@ -1,6 +1,6 @@
 import shutil
 import os
-import config as cfg
+import globals as cfg
 
 # Refreshes published documentation webpages for Latimer Core.
 # Copy Build Files from StaDocGen to /docs in LtC Repo

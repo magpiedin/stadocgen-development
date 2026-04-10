@@ -1,6 +1,6 @@
 import urllib.request
 import os
-import config as cfg
+import globals as cfg
 
 '''
 Copies source data files and markdown content files from the Mineralogy Extension repository (https://github.com/tdwg/mineralogy) to the StaDocGen repository

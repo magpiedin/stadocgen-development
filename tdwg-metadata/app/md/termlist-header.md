@@ -1,1 +1,0 @@
-# TDWG Metadata Terms
